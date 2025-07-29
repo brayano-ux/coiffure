@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopExpress Beauté</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #fff0f6, #ffe4e1);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #ff69b4, #ff85c0);
+      color: white;
+      text-align: center;
+      padding: 3rem 1rem;
+      position: relative;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+
+    .services {
+      display: flex;
+      flex-wrap: wrap;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 3rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      justify-content: space-around;
+
+    }
+
+    .service {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeIn 0.5s ease-in-out;
+      width: 350px;
+    }
+
+    .service:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .service img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-bottom: 3px solid #ff69b4;
+      display: block;
+    }
+
+    .service-content {
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .service-content h3 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #ff69b4;
+      margin-bottom: 0.5rem;
+    }
+
+    .service-content p {
+      font-size: 1rem;
+      color: #555;
+      margin: 0.3rem 0;
+    }
+
+    .whatsapp-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #25d366, #20b058);
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 1rem;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .whatsapp-btn:hover {
+      background: linear-gradient(135deg, #20b058, #25d366);
+      transform: scale(1.05);
+    }
+
+    footer {
+      background: #f8f8f8;
+      padding: 2rem;
+      text-align: center;
+      border-top: 1px solid #eee;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+      color: #777;
+    }
+
+    .social-links {
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: #ff69b4;
+      font-size: 1.5rem;
+      margin: 0 0.5rem;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: #ff85c0;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      header p {
+        font-size: 1rem;
+      }
+
+      .services {
+        grid-template-columns: 1fr;
+        padding: 2rem 1rem;
+      }
+
+      .service img {
+        height: 200px;
+      }
+    }
+    input{
+        height: 30px;
+        width: 400px;
+        border-radius: 10px;
+        position: relative;left: 00px;
+    }
+    #reserve{
+        text-align: center;
+        color: blue;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 25px;}
+
+        #formulaire h3 {
+    font-size: 28px;
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  #formulaire {
+    position: relative;
+    background-color: white;
+    padding: 30px;
+    margin: 30px auto;
+    border-radius: 15px;
+    width: 95%;
+    max-width: 600px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #444;
+  }
+  select{
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px; 
+  }
+    #time{
+      width:200px;
+      padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px; 
+    }
+  input[type="text"],
+  input[type="number"]
+  {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+   #comfirme{
+    height: 50px;
+        width: 40%;
+        text-align: center;
+        font-size: 25px;
+        border-radius: 15px;
+        background-color: green;
+        margin: 20px;
+   }
+   #annule{
+    height: 50px;
+        width: 40%;
+        text-align: center;
+        font-size: 25px;
+        border-radius: 15px;
+        background-color: red;
+   }
+   .annuler{
+    height: 50px;
+        width: 30%;
+        text-align: center;
+        font-size: 25px;
+        border-radius: 15px;
+        background-color: red;
+   }
+ #statusCheck { 
+    background-color: beige;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    width: 90%;
+    height: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative;left:0px;  
+}
+.verifie{
+    height: 40px;
+        width: 50%;
+        text-align: center;
+        font-size: 25px;
+        border-radius: 15px;
+        background-color: green; 
+        position: relative;left: 40px;  
+}
+.bord{
+    height: 50px;
+    width: 150px;
+    background-color: #20b058;
+    border-radius: 15px;
+
+}
+.admin{
+    background-color: white;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    max-width: 1000px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: flex;flex-wrap: wrap;justify-content: space-around;
+}
+.retour{
+    height: 3opx;
+    width: 150px;
+    background-color: #20b058;
+    border-radius: 15px;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+  </style>
+</head>
+<body>
+    <header>
+      <h1>ShopExpress Beauté INNOVA</h1>
+      <p>Réservez votre look en un clic ✨</p>
+    </header>
+  
+    <section class="services" id="tous">
+      <div class="service">
+        <img src="https://i.postimg.cc/02V0vj1q/Screenshot-20250703-215049.jpg">
+        <div class="service-content">
+          <h3>Nattes africaines</h3>
+          <p>Prix : 4 000 FCFA</p>
+          <p>Durée : ~1h30</p>
+          <button class="whatsapp-btn">Réserver</button>
+        </div>
+      </div>
+  
+      <div class="service">
+        <img src="https://i.postimg.cc/nh5KsWLR/Screenshot-20250703-215157.jpg">
+        <div class="service-content">
+          <h3>Maquillage professionnel</h3>
+          <p>Prix : 7 000 FCFA</p>
+          <p>Durée : ~45 min</p>
+          <button class="whatsapp-btn">Réserver</button>
+        </div>
+      </div>
+  
+      <div class="service">
+        <img src="https://i.postimg.cc/tJtDWNc1/Screenshot-20250703-215113-2.jpg">
+        <div class="service-content">
+          <h3>Pose de perruque</h3>
+          <p>Prix : 5 500 FCFA</p>
+          <p>Durée : ~1h</p>
+          <button class="whatsapp-btn">Réserver</button>
+        </div>
+      </div>
+            <div id="statusCheck">
+        <h3>Vérifier l'état de votre réservation</h3>
+        <br>
+        <input type="number" id="checkNumber" required placeholder="Entrez votre numéro WhatsApp">
+        <button onclick="checkStatus()" class="verifie">Vérifier</button>
+        <br>
+        <p id="statusResult"></p>
+      </div>
+    </section>
+  
+    <div id="formulaire" style="display: none;">
+      <h3 id="reserve">Réservation en ligne</h3>
+      <form id="formule">
+        <label>Compte rendu:</label>
+        <input type="text" id="service" readonly placeholder="service">
+        <br><br>
+  
+        <label>Jour de retrait</label>
+        <input type="date" id="date" required>
+        <br><br>
+  
+        <label>Heure de retrait:</label>
+        <select id="time" required>
+          <option value="08:00">08:00</option>
+          <option value="09:00">09:00</option>
+          <option value="10:00">10:00</option>
+          <option value="11:00">11:00</option>
+          <option value="12:00">12:00</option>
+          <option value="13:00">13:00</option>
+          <option value="14:00">14:00</option>
+          <option value="15:00">15:00</option>
+          <option value="16:00">16:00</option>
+          <option value="17:00">17:00</option>
+          <option value="18:00">18:00</option>
+        </select>
+        <br><br>
+  
+        <label>Numéro WhatsApp:</label>
+        <input type="number" id="numero" required placeholder="Numéro WhatsApp">
+        <br>
+        <br>
+        <div>
+          <button type="submit" id="comfirme">Confirmer</button>
+          <button type="button" onclick="fermer()" id="annule">Annuler</button>
+        </div>
+      </form>
+    </div>
+    <button onclick="showDashboard()" class="bord" id="bord">Tableau de bord (Admin)</button>
+
+<div id="dashboard" style="display: none;">
+  <h2 style="text-align: center;">Tableau de bord - Gestion des réservations</h2>
+  <button onclick="toggleDashboard()" class="retour">Retour</button>
+  <ul id="bookingList"></ul>
+</div>
+    <footer>
+      <p>© 2025 ShopExpress - Votre beauté, notre priorité</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+      </div>
+    </footer>
+  
+    <script src="https://kit.fontawesome.com/a076d05399.js" defer></script>
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+      import { getFirestore, collection, addDoc,query,where,getDocs,onSnapshot, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-firestore.js";
+  
+      const firebaseConfig = {
+        apiKey: "AIzaSyA6rq0a6kG0bf7ChXEZyarDPWh4ougVofQ",
+        authDomain: "gere-b2d31.firebaseapp.com",
+        projectId: "gere-b2d31",
+        storageBucket: "gere-b2d31.appspot.com",
+        messagingSenderId: "166834348126",
+        appId: "1:166834348126:web:cffe60797ac377fb4a14cf",
+        measurementId: "G-YK8Y0Z7F2L"
+      };
+  
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+  
+      window.fermer = function () {
+        document.getElementById('formulaire').style.display = 'none';
+       tous= document.getElementById('tous').style.display = 'flex';
+       tous.style.justifyContent='space-around';
+       tous.style.flexWrap='wrap';
+       tous.style.gap='20px';
+      };
+       document.querySelectorAll('.whatsapp-btn').forEach(btn => {
+        btn.addEventListener("click", () => {
+          const titre = btn.parentElement.querySelector("h3").textContent;
+          document.getElementById('service').value = titre;
+          document.getElementById('formulaire').style.display = 'block';
+          document.getElementById('tous').style.display = 'none';
+        
+        });
+      });
+      document.getElementById('formule').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const service = document.getElementById('service').value;
+        const date = document.getElementById('date').value;
+        const heure = document.getElementById('time').value;
+        const numero = document.getElementById('numero').value;
+  
+        if (!service || !date || !heure || !numero) {
+          alert("Veuillez remplir tous les champs.");
+          return;
+        }
+  
+        const form = {
+          service,
+          date,
+          heure,
+          numero,
+          phone,
+          createdAt: new Date().toISOString()
+          
+
+        };
+  
+        try {
+          await addDoc(collection(db, "bookings"), form);
+          alert(`✅ Réservation confirmée pour ${form.service} le ${form.date} à ${form.heure}. Contact : ${form.numero}`);
+          fermer();
+        } catch (error) {
+          console.error("❌ Erreur Firebase :", error);
+          alert("Erreur lors de la réservation !");
+        }
+      });
+     document.addEventListener("DOMContentLoaded", () => {
+      const unsubscribe = {};
+
+      document.getElementById('checkNumber').addEventListener('input', async (e) => {
+        const phone = e.target.value;
+        if (unsubscribe[phone]) unsubscribe[phone](); 
+        if (phone) {
+          const q = query(collection(db, 'bookings'), where('numero', '==', phone));
+          unsubscribe[phone] = onSnapshot(q, (snapshot) => {
+            snapshot.docChanges().forEach((change) => {
+              if (change.type === 'modified') {
+                const data = change.doc.data();
+                if (data.status === 'annulé') {
+                  alert(`❌ Votre réservation pour ${data.service} le ${data.date} à ${data.heure} a été annulée.`);
+                  document.getElementById('statusResult').textContent = `Statut : ${data.status}.`;
+                }
+              }
+            });
+          });
+        } else {
+          document.getElementById('statusResult').textContent = '';
+        }
+      });
+      window.checkStatus = async function () {
+        const phone = document.getElementById('checkNumber').value;
+        const q = query(collection(db, 'bookings'), where('numero', '==', phone));
+        const snapshot = await getDocs(q);
+        if (!snapshot.empty) {
+          const data = snapshot.docs[0].data();
+          document.getElementById('statusResult').textContent =`
+            ✅ Réservation pour ${data.service} le ${data.date} à ${data.heure}. Statut : ${data.status}.`;
+        } else {
+          document.getElementById('statusResult').textContent = "❗ Aucune réservation trouvée avec ce numéro.";
+        }
+      };
+    });
+const ADMIN_PASSWORD = "admin123";  
+window.showDashboard = async function () {
+  const password = prompt("Entrez le mot de passe admin :");
+  if (password === ADMIN_PASSWORD) {
+    document.getElementById('dashboard').style.display = 'block';
+    document.getElementById('tous').style.display = 'none';
+    document.getElementById('formulaire').style.display = 'none';
+    await loadBookings();
+  } else {
+    alert("❌ Mot de passe incorrect !");
+  }
+};
+window.toggleDashboard = function () {
+  document.getElementById('dashboard').style.display = 'none';
+  tous= document.getElementById('tous').style.display = 'flex';
+       tous.style.justifyContent='space-around';
+       tous.style.flexWrap='wrap';
+       tous.style.gap='20px';
+};
+async function loadBookings() {
+  const bookingList = document.getElementById('bookingList');
+  bookingList.innerHTML = ''; 
+
+  const querySnapshot = await getDocs(collection(db, "bookings"));
+  querySnapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    const li = document.createElement("li");
+    li.innerHTML = `
+      <p class="admin"><strong>${data.service}</strong> - ${data.date} à ${data.heure}<br>
+      Numéro : ${data.numero} <br>
+      Statut : ${data.status || "confirmé"}
+      <br>
+      <button class="annuler" onclick="cancelBooking('${docSnap.id}', '${data.numero}')">Annuler</button>
+      <hr></p>
+    `;
+    bookingList.appendChild(li);
+    document.getElementById('bord').style.display='none';
+  });
+}
+window.cancelBooking = async function (id, phone) {
+  try {
+    await updateDoc(doc(db, 'bookings', id), { status: "annulé" });
+    await loadBookings();
+    alert(`Réservation annulée. Informez le client au ${phone}.`);
+  } catch (error) {
+    console.error('Erreur Firebase :', error);
+    alert("Erreur lors de l'annulation !");
+  }
+};
+    document.getElementById('verifie').addEventListener("click",function(){
+     il=document.getElementById('checkNumber').value; 
+     if (!il){
+        alert('Veuiller entrer votre Numero wahtsapp');
+     } 
+    });
+    </script>
+  </body>
+</html>
