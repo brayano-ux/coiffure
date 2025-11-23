@@ -1,4 +1,3 @@
-<html lang="fr">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -564,19 +563,6 @@
             color: #856404;
             font-size: 0.95em;
         }
-    </style>
-</head>
-
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activation - Formation JavaScript</title>
-    <!-- CinetPay SDK -->
-    <script src="https://api.cinetpay.com/cdn/seamless/main.js"></script>
-    <style>
         * {
             margin: 0;
             padding: 0;
