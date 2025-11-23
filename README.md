@@ -561,8 +561,6 @@
             font-size: 0.95em;
         }
     </style>
-
-<!DOCTYPE html>
 <html lang="fr">
 
 <head>
