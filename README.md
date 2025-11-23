@@ -1,6 +1,5 @@
-<!DOCTYPE html>
 <html lang="fr">
-<head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formation JavaScript Complète - ES6+</title>
@@ -899,7 +898,6 @@
     border: 2px solid #f5c6cb;
 }
     </style>
-</head>
 
 <body>
    <div class="tous" style="display: block;">
@@ -4023,5 +4021,4 @@ console.log(\`J'habite à \${ville}\`);`
         });
     </script>
     
-</body>
-</html>
+
