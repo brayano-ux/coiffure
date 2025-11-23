@@ -1,4 +1,5 @@
-
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formation JavaScript Complète - ES6+</title>
@@ -563,6 +564,16 @@
             color: #856404;
             font-size: 0.95em;
         }
+    </style>
+
+<html lang="fr">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activation - Formation JavaScript</title>
+    <!-- CinetPay SDK -->
+    <script src="https://api.cinetpay.com/cdn/seamless/main.js"></script>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -884,6 +895,7 @@
     border: 2px solid #f5c6cb;
 }
     </style>
+</head>
 
 <body>
    <div class="tous" style="display: block;">
@@ -902,7 +914,7 @@
 </div>
             <script>
                (function(){
-    const CLE_ACCES = 'Brayanoformation202';
+    const CLE_ACCES = 'brayanoformation202';
     const ACT_KEY = 'formationJsActivated';
     const LICENSE_KEY = 'formationJsLicense';
 
@@ -4007,4 +4019,4 @@ console.log(\`J'habite à \${ville}\`);`
         });
     </script>
     
-
+</body>
