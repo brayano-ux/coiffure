@@ -1,3 +1,572 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formation JavaScript Complète - ES6+</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav {
+            background: #2d3748;
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav a:hover {
+            background: #667eea;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 60px;
+            scroll-margin-top: 80px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 30px 0 15px;
+        }
+
+        h4 {
+            color: #2d3748;
+            font-size: 1.2em;
+            margin: 20px 0 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .info-box {
+            background: #e6f3ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            position: relative;
+        }
+
+        .code-block::before {
+            content: 'JavaScript';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 3px;
+            font-size: 0.8em;
+        }
+
+        .code-inline {
+            background: #f1f3f5;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #c7254e;
+        }
+
+        .example {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .demo-area {
+            background: white;
+            border: 2px dashed #667eea;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 15px 0;
+            min-height: 60px;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 5px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        input, select {
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 5px;
+            font-size: 1em;
+            margin: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        table tr:hover {
+            background: #f8f9fa;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .nav {
+                position: static;
+            }
+            button {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 1.8em;
+            }
+            .nav ul {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .activation-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            padding: 50px 40px;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lock-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .activate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .activate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .activate-btn:active {
+            transform: translateY(0);
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-weight: bold;
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .message.warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 2px solid #ffeeba;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .help-text {
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .help-text a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .help-text a:hover {
+            text-decoration: underline;
+        }
+
+        .loading {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .example-key {
+            background: #f8f9fa;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .license-success-box {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .license-success-box h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .generated-key {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5em;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+
+        .copy-key-btn {
+            background: white;
+            color: #4caf50;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+
+        .copy-key-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .copy-key-btn.copied {
+            background: #2196f3;
+            color: white;
+        }
+
+        .email-note {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -5,2624 +574,3454 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShopVerse - Votre Destination Shopping Premium</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>Activation - Formation JavaScript</title>
+    <!-- CinetPay SDK -->
+    <script src="https://api.cinetpay.com/cdn/seamless/main.js"></script>
     <style>
-     :root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --secondary-gradient: linear-gradient(45deg, #ff6b6b, #4ecdc4);
-    --accent-color: #4ecdc4;
-    --warning-color: #ff6b6b;
-    --success-color: #2ecc71;
-    --text-light: rgba(255, 255, 255, 0.9);
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.1);
-    --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.3);
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--primary-gradient);
-    min-height: 100vh;
-    overflow-x: hidden;
-    line-height: 1.6;
-    scroll-behavior: smooth;
-}
-
-/* Header professionnel */
-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    background: var(--glass-bg);
-    backdrop-filter: blur(25px);
-    border-bottom: 1px solid var(--glass-border);
-    z-index: 1000;
-    transition: var(--transition-smooth);
-    padding: 0;
-}
-
-header.scrolled {
-    background: rgba(255, 255, 255, 0.95);
-    box-shadow: var(--shadow-soft);
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1400px;
-    background-color:rgba(0, 0, 255, 0.5);
-    margin: 0 auto;
-    padding: 1rem 2rem;
-    position: relative;
-}
-
-.logo {
-    font-size: 2rem;
-    font-weight: 800;
-    background: var(--secondary-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: -0.02em;
-    cursor: pointer;
-    transition: var(--transition-smooth);
-}
-
-.logo:hover {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 20px rgba(76, 205, 196, 0.5));
-}
-
-.nav-search {
-    display: flex;
-    align-items: center;
-    background: var(--glass-bg);
-    border-radius: 50px;
-    padding: 0.75rem 1.5rem;
-    border: 1px solid var(--glass-border);
-    transition: var(--transition-smooth);
-    min-width: 300px;
-    backdrop-filter: blur(20px);
-}
-
-.nav-search:focus-within {
-    background: rgba(255, 255, 255, 0.15);
-    transform: scale(1.02);
-    box-shadow: 0 0 0 3px rgba(76, 205, 196, 0.3);
-}
-
-.nav-search input {
-    background: none;
-    border: none;
-    color: white;
-    outline: none;
-    flex: 1;
-    padding: 0.25rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 400;
-}
-
-.nav-search input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.nav-search i {
-    color: rgba(255, 255, 255, 0.7);
-    margin-right: 0.5rem;
-}
-
-.nav-links {
-    width: 100%;
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    align-items: center;
-}
-
-.nav-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 1rem;
-    transition: var(--transition-smooth);
-    position: relative;
-    padding: 0.75rem 1.25rem;
-    border-radius: 25px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.nav-links a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-2px);
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 2px;
-    background: var(--accent-color);
-    transition: var(--transition-smooth);
-    transform: translateX(-50%);
-}
-
-.nav-links a:hover::after {
-    width: 80%;
-}
-
-.mobile-menu-btn {
-    display: none;
-    background: var(--glass-bg);
-    border: 1px solid var(--glass-border);
-    color: white;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: var(--transition-smooth);
-    backdrop-filter: blur(20px);
-}
-
-.mobile-menu-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: scale(1.1);
-}
-
-.mobile-nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--glass-bg);
-    backdrop-filter: blur(30px);
-    border-bottom: 1px solid var(--glass-border);
-    padding: 1rem 2rem;
-}
-
-.mobile-nav.open {
-    display: block;
-    animation: slideDown 0.3s ease;
-}
-
-.mobile-nav .nav-links {
-    flex-direction: column;
-    gap: 0;
-}
-
-.mobile-nav .nav-links a {
-    width: 100%;
-    justify-content: flex-start;
-    padding: 1rem;
-    border-radius: 15px;
-    margin-bottom: 0.5rem;
-}
-
-@keyframes slideDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Hero section améliorée */
-.hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-    padding: 2rem;
-}
-
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-        radial-gradient(circle at 20% 80%, rgba(255, 107, 107, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(76, 205, 196, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(118, 75, 162, 0.1) 0%, transparent 50%);
-    animation: heroFloat 12s ease-in-out infinite;
-}
-
-@keyframes heroFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.8; }
-    33% { transform: translateY(-10px) rotate(1deg); opacity: 1; }
-    66% { transform: translateY(-5px) rotate(-1deg); opacity: 0.9; }
-}
-
-.hero-content {
-    z-index: 2;
-    color: white;
-    max-width: 900px;
-}
-
-.hero h1 {
-    font-size: clamp(2.5rem, 7vw, 4.5rem);
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, #fff, #f0f0f0, #4ecdc4);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-top: 6rem;
-}
-
-.hero-subtitle {
-    font-size: clamp(1.1rem, 3vw, 1.4rem);
-    margin-bottom: 2.5rem;
-    opacity: 0.9;
-    font-weight: 400;
-    max-width: 700px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.5;
-}
-
-.hero-stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 2rem;
-    margin: 2.5rem 0;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.stat-item {
-    text-align: center;
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: var(--transition-smooth);
-}
-
-.stat-item:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.stat-number {
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
-    font-weight: 800;
-    color: var(--accent-color);
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.stat-label {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    font-weight: 500;
-}
-
-.hero-cta {
-    display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-top: 3rem;
-}
-
-.cta-button {
-    padding: 1.2rem 2.5rem;
-    background: var(--secondary-gradient);
-    color: white;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    transition: var(--transition-smooth);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    position: relative;
-    overflow: hidden;
-    border: none;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    min-width: 200px;
-    justify-content: center;
-}
-
-.cta-button.secondary {
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    backdrop-filter: blur(15px);
-}
-
-.cta-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.6s ease;
-}
-
-.cta-button:hover::before {
-    left: 100%;
-}
-
-.cta-button:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-}
-
-/* Panier flottant amélioré */
-.cart-icon {
-    position: fixed;
-    bottom: 2rem;
-    right: 2rem;
-    background: var(--secondary-gradient);
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.8rem;
-    cursor: pointer;
-    z-index: 1001;
-    box-shadow: var(--shadow-strong);
-    transition: var(--transition-smooth);
-    border: 3px solid rgba(255, 255, 255, 0.1);
-}
-
-.cart-icon:hover {
-    transform: scale(1.1);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
-}
-
-.cart-count {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: var(--warning-color);
-    color: white;
-    border-radius: 50%;
-    width: 28px;
-    height: 28px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    font-weight: 700;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-/* Sidebar panier responsive */
-.cart-sidebar {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: min(450px, 100vw);
-    height: 100vh;
-    background: var(--glass-bg);
-    backdrop-filter: blur(30px);
-    border-left: 1px solid var(--glass-border);
-    z-index: 1002;
-    transition: var(--transition-smooth);
-    overflow-y: auto;
-    padding: 2rem;
-}
-
-.cart-sidebar.open {
-    right: 0;
-    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.3);
-}
-
-/* Sections principales */
-.main-content {
-    padding-top: 0;
-}
-
-.categories {
-    padding: 4rem 1rem;
-    max-width: 1400px;
-    margin: 0 auto;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: 4rem;
-    padding: 0 1rem;
-}
-
-.section-title {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    color: white;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #fff, #e0e0e0, var(--accent-color));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-}
-
-.section-subtitle {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
-    color: var(--text-light);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-/* Grille de catégories responsive */
-.category-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
-    gap: 2rem;
-    margin-bottom: 4rem;
-}
-
-.category-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(25px);
-    border-radius: 25px;
-    padding: 2rem;
-    text-align: center;
-    transition: var(--transition-smooth);
-    border: 1px solid var(--glass-border);
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.category-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: var(--shadow-strong);
-    border-color: rgba(255, 255, 255, 0.4);
-}
-
-.category-icon {
-    font-size: clamp(3rem, 8vw, 4.5rem);
-    margin-bottom: 1.5rem;
-    background: var(--secondary-gradient);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 15px rgba(255, 107, 107, 0.3));
-}
-
-.category-card h3 {
-    color: white;
-    font-size: clamp(1.3rem, 3vw, 1.8rem);
-    margin-bottom: 1rem;
-    font-weight: 700;
-}
-
-.category-card p {
-    color: var(--text-light);
-    line-height: 1.6;
-    margin-bottom: 2rem;
-    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
-}
-
-/* Grille de produits responsive */
-.product-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-.product-card {
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 20px;
-    padding: 1.25rem;
-    transition: var(--transition-smooth);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    backdrop-filter: blur(15px);
-    display: flex;
-    flex-direction: column;
-}
-
-.product-card:hover {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-}
-
-.product-image {
-    width: 100%;
-    height: 180px;
-    background: var(--primary-gradient);
-    border-radius: 15px;
-    margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    color: white;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.product-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 15px;
-}
-
-.product-badge {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: var(--warning-color);
-    color: white;
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    z-index: 1;
-}
-
-.product-info {
-    position: relative;
-    z-index: 2;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-}
-
-.product-name {
-    color: white;
-    font-weight: 700;
-    font-size: clamp(1rem, 2.5vw, 1.1rem);
-    margin-bottom: 0.5rem;
-    line-height: 1.3;
-}
-
-.product-description {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: clamp(0.8rem, 2vw, 0.9rem);
-    margin-bottom: 1rem;
-    line-height: 1.4;
-    flex-grow: 1;
-}
-
-.product-price-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.product-price {
-    color: var(--accent-color);
-    font-size: clamp(1.1rem, 3vw, 1.4rem);
-    font-weight: 800;
-}
-
-.product-old-price {
-    color: rgba(255, 255, 255, 0.5);
-    text-decoration: line-through;
-    font-size: clamp(0.8rem, 2vw, 1rem);
-    margin-left: 0.5rem;
-}
-
-.product-rating {
-    display: flex;
-    align-items: center;
-    gap: 0.2rem;
-    color: #ffd700;
-    font-size: clamp(0.8rem, 2vw, 0.9rem);
-}
-
-.quick-add-btn {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    background: var(--secondary-gradient);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.25rem;
-    border-radius: 25px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    opacity: 0;
-    transform: translateY(15px) scale(0.8);
-    transition: var(--transition-smooth);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.product-card:hover .quick-add-btn {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-}
-
-.quick-add-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
-}
-
-/* Trust indicators */
-.trust-section {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    margin: 3rem 0;
-    padding: 3rem 1rem;
-    border-radius: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.trust-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-    gap: 2rem;
-    text-align: center;
-}
-
-.trust-item {
-    color: white;
-    padding: 1.5rem 1rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    transition: var(--transition-smooth);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.trust-item:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.trust-icon {
-    font-size: clamp(2.5rem, 6vw, 3rem);
-    color: var(--accent-color);
-    margin-bottom: 1rem;
-}
-
-.trust-title {
-    font-size: clamp(1rem, 2.5vw, 1.2rem);
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-}
-
-/* Newsletter responsive */
-.newsletter-section {
-    background: var(--glass-bg);
-    backdrop-filter: blur(25px);
-    border-radius: 25px;
-    padding: 3rem 1rem;
-    text-align: center;
-    margin: 3rem 0;
-    border: 1px solid var(--glass-border);
-}
-
-.newsletter-form {
-    display: flex;
-    gap: 1rem;
-    max-width: 500px;
-    margin: 2rem auto 0;
-    flex-wrap: wrap;
-}
-
-.newsletter-input {
-    flex: 1;
-    min-width: 250px;
-    padding: 1rem 1.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 25px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 1rem;
-    transition: var(--transition-smooth);
-}
-
-.newsletter-input:focus {
-    outline: none;
-    border-color: var(--accent-color);
-    background: rgba(255, 255, 255, 0.15);
-}
-
-.newsletter-btn {
-    background: var(--secondary-gradient);
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 25px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition-smooth);
-    min-width: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.newsletter-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-/* Cart items */
-.cart-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 15px;
-    margin-bottom: 1rem;
-    transition: var(--transition-smooth);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.cart-item:hover {
-    background: rgba(255, 255, 255, 0.12);
-    transform: translateY(-2px);
-}
-
-.cart-item-image {
-    width: 60px;
-    height: 60px;
-    background: var(--primary-gradient);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    background-size: cover;
-    background-position: center;
-    flex-shrink: 0;
-}
-
-.cart-item-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.cart-item-name {
-    color: white;
-    font-weight: 700;
-    font-size: 0.95rem;
-    margin-bottom: 0.3rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.quantity-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.75rem;
-}
-
-.quantity-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: var(--transition-smooth);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.quantity-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
-}
-
-.quantity-value {
-    color: white;
-    font-weight: 600;
-    min-width: 30px;
-    text-align: center;
-    font-size: 0.9rem;
-}
-
-.remove-item {
-    background: rgba(255, 107, 107, 0.2);
-    border: 1px solid rgba(255, 107, 107, 0.5);
-    color: #ff6b6b;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: var(--transition-smooth);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-}
-
-.remove-item:hover {
-    background: rgba(255, 107, 107, 0.3);
-    transform: scale(1.1);
-}
-
-/* Cart header */
-.cart-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.cart-title {
-    color: white;
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin: 0;
-}
-
-.cart-close {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: var(--transition-smooth);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.cart-close:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
-}
-
-/* Cart total */
-.cart-total {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.clear-cart-btn {
-    background: rgba(255, 107, 107, 0.2);
-    color: white;
-    border: 1px solid rgba(255, 107, 107, 0.5);
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: var(--transition-smooth);
-    margin-bottom: 1rem;
-    width: 100%;
-    font-weight: 600;
-}
-
-.clear-cart-btn:hover {
-    background: rgba(255, 107, 107, 0.3);
-    transform: translateY(-2px);
-}
-
-.cart-total-price {
-    color: var(--accent-color);
-    font-size: 1.3rem;
-    font-weight: 700;
-    text-align: center;
-    margin: 1rem 0;
-    padding: 1rem;
-    background: rgba(76, 205, 196, 0.1);
-    border-radius: 15px;
-    border: 1px solid rgba(76, 205, 196, 0.3);
-}
-
-.checkout-btn {
-    background: var(--secondary-gradient);
-    color: white;
-    border: none;
-    padding: 1.2rem 2rem;
-    border-radius: 25px;
-    font-size: 1rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: var(--transition-smooth);
-    width: 100%;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-}
-
-.checkout-btn:hover:not(:disabled) {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-}
-
-.checkout-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-}
-
-/* Cart overlay */
-.cart-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1001;
-    opacity: 0;
-    visibility: hidden;
-    transition: var(--transition-smooth);
-    backdrop-filter: blur(5px);
-}
-
-.cart-overlay.open {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Order modal */
-.order-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 10000;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    backdrop-filter: blur(10px);
-}
-
-.order-modal.open {
-    display: flex;
-}
-
-.order-modal-content {
-    background: var(--glass-bg);
-    backdrop-filter: blur(30px);
-    border: 1px solid var(--glass-border);
-    border-radius: 25px;
-    padding: 2.5rem;
-    max-width: 600px;
-    width: 100%;
-    max-height: 90vh;
-    overflow-y: auto;
-    position: relative;
-}
-
-/* Form styles */
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    color: white;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    font-size: 1rem;
-}
-
-.form-group input,
-.form-group textarea {
-    width: 100%;
-    padding: 1rem 1.25rem;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    font-size: 1rem;
-    transition: var(--transition-smooth);
-    font-family: inherit;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: var(--accent-color);
-    background: rgba(255, 255, 255, 0.15);
-    box-shadow: 0 0 0 3px rgba(76, 205, 196, 0.2);
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-}
-
-.form-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2.5rem;
-}
-
-.form-btn {
-    flex: 1;
-    padding: 1.2rem 2rem;
-    border-radius: 25px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition-smooth);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-}
-
-.btn-cancel {
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.btn-cancel:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-}
-
-.btn-confirm {
-    background: var(--secondary-gradient);
-    color: white;
-    border: none;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-.btn-confirm:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
-}
-
-/* Footer professionnel */
-footer {
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8));
-    backdrop-filter: blur(25px);
-    padding: 4rem 1rem 2rem;
-    color: white;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    margin-top: 4rem;
-}
-
-.footer-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
-    gap: 3rem;
-}
-
-.footer-section h4 {
-    color: var(--accent-color);
-    margin-bottom: 1.5rem;
-    font-size: 1.2rem;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.footer-links {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-}
-
-.footer-links a {
-    color: var(--text-light);
-    text-decoration: none;
-    transition: var(--transition-smooth);
-    padding: 0.5rem 0;
-    border-radius: 8px;
-    position: relative;
-}
-
-.footer-links a:hover {
-    color: var(--accent-color);
-    transform: translateX(8px);
-}
-
-.social-icons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
-}
-
-.social-icon {
-    width: 50px;
-    height: 50px;
-    background: var(--glass-bg);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.3rem;
-    transition: var(--transition-smooth);
-    border: 1px solid var(--glass-border);
-    text-decoration: none;
-}
-
-.social-icon:hover {
-    background: var(--secondary-gradient);
-    transform: translateY(-5px) scale(1.1);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-}
-
-.footer-bottom {
-    text-align: center;
-    margin-top: 3rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.95rem;
-}
-
-/* Notifications */
-.notification {
-    position: fixed;
-    top: 120px;
-    right: 20px;
-    background: var(--glass-bg);
-    backdrop-filter: blur(25px);
-    border: 1px solid var(--glass-border);
-    color: white;
-    padding: 1.25rem 1.75rem;
-    border-radius: 15px;
-    z-index: 10000;
-    animation: notificationSlide 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: min(350px, calc(100vw - 40px));
-    box-shadow: var(--shadow-strong);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.notification.success {
-    border-left: 4px solid var(--success-color);
-}
-
-.notification.error {
-    border-left: 4px solid var(--warning-color);
-}
-
-.notification i {
-    font-size: 1.2rem;
-    flex-shrink: 0;
-}
-
-@keyframes notificationSlide {
-    from { 
-        transform: translateX(100%); 
-        opacity: 0; 
-    }
-    to { 
-        transform: translateX(0); 
-        opacity: 1; 
-    }
-}
-
-/* Animations d'entrée */
-.animate-in {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-in.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Loading states */
-.loading {
-    position: relative;
-    overflow: hidden;
-}
-
-.loading::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    animation: shimmer 1.5s infinite;
-}
-
-@keyframes shimmer {
-    100% { left: 100%; }
-}
-
-/* Responsive Design Mobile-First */
-@media (max-width: 768px) {
-    /* Header mobile */
-    .navbar {
-        height: 150px;
-        padding: 1rem;
-        flex-wrap: wrap;
-        gap: 1rem;
-    }
-
-    .nav-links {
-        display: none;
-    }
-
-    .mobile-menu-btn {
-        display: flex;
-    }
-
-
-    .nav-search {
-        order: 3;
-        width: 100%;
-        min-width: unset;
-        margin-top: 1rem;
-    }
-
-    .nav-search input {
-        font-size: 1rem;
-       
-    }
-
-    .hero {
-        padding: 1rem;
-        min-height: 100vh;
-    }
-
-    .hero h1 {
-        margin-top: 8rem;
-    }
-
-    .hero-stats {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-        margin: 2rem 0;
-    }
-
-    .stat-item {
-        padding: 0.75rem;
-    }
-
-    .hero-cta {
-        flex-direction: column;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .cta-button {
-        width: 100%;
-        max-width: 300px;
-        padding: 1rem 2rem;
-    }
-
-    /* Categories mobile */
-    .categories {
-        padding: 3rem 1rem;
-    }
-
-    .category-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-
-    .category-card {
-        padding: 1.5rem;
-    }
-
-    .product-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1rem;
-    }
-
-    .product-card {
-        padding: 1rem;
-    }
-
-    .product-image {
-        height: 150px;
-    }
-
-    .quick-add-btn {
-        position: static;
-        opacity: 1;
-        transform: none;
-        width: 100%;
-        margin-top: 1rem;
-        justify-content: center;
-    }
-
-    /* Trust section mobile */
-    .trust-section {
-        padding: 2rem 1rem;
-        margin: 2rem 0;
-    }
-
-    .trust-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-
-    .trust-item {
-        padding: 1rem;
-    }
-
-    /* Newsletter mobile */
-    .newsletter-section {
-        padding: 2rem 1rem;
-        margin: 2rem 0;
-    }
-
-    .newsletter-form {
-        flex-direction: column;
-        max-width: 100%;
-    }
-
-    .newsletter-input {
-        min-width: unset;
-        margin-bottom: 1rem;
-    }
-
-    /* Cart mobile */
-    .cart-icon {
-        bottom: 1.5rem;
-        right: 1.5rem;
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-    }
-
-    .cart-count {
-        width: 24px;
-        height: 24px;
-        font-size: 0.7rem;
-    }
-
-    .cart-sidebar {
-        width: 100vw;
-        padding: 1.5rem;
-    }
-
-    /* CSS de base pour les items du panier */
-.cart-item {
-    padding: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.3s ease;
-}
-
-.cart-item:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-}
-
-.cart-item-image {
-    width: 80px;
-    height: 80px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 8px;
-    flex-shrink: 0;
-}
-
-.cart-item-info {
-    flex: 1;
-    min-width: 0; /* Permet au contenu de se rétrécir */
-}
-
-.cart-item-name {
-    font-weight: 600;
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-    line-height: 1.2;
-}
-
-.quantity-controls {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-}
-
-.quantity-btn {
-    width: 32px;
-    height: 32px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.1);
-    color: white;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.8rem;
-}
-
-.quantity-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.quantity-value {
-    min-width: 30px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.remove-item {
-    width: 40px;
-    height: 40px;
-    border: none;
-    background: rgba(255, 69, 58, 0.1);
-    color: #ff453a;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.remove-item:hover {
-    background: rgba(255, 69, 58, 0.2);
-    transform: scale(1.05);
-}
-
-/* Responsive pour tablettes (768px et moins) */
-@media (max-width: 768px) {
-    .cart-item {
-        padding: 0.75rem;
-        gap: 0.75rem;
-    }
-    
-    .cart-item-image {
-        width: 70px;
-        height: 70px;
-    }
-    
-    .cart-item-name {
-        font-size: 0.95rem;
-    }
-    
-    .quantity-btn {
-        width: 30px;
-        height: 30px;
-        font-size: 0.75rem;
-    }
-    
-    .remove-item {
-        width: 36px;
-        height: 36px;
-    }
-}
-
-/* Responsive pour mobiles (480px et moins) */
-@media (max-width: 480px) {
-    .cart-item {
-        padding: 0.5rem;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.75rem;
-        position: relative;
-    }
-    
-    /* Conteneur pour image et infos principales */
-    .cart-item-main {
-        display: flex;
-        align-items: flex-start;
-        gap: 0.75rem;
-    }
-    
-    .cart-item-image {
-        width: 60px;
-        height: 60px;
-        flex-shrink: 0;
-    }
-    
-    .cart-item-info {
-        flex: 1;
-        min-width: 0;
-    }
-    
-    .cart-item-name {
-        font-size: 0.9rem;
-        margin-bottom: 0.25rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-    
-    .cart-item-description {
-        font-size: 0.75rem !important;
-        opacity: 0.7 !important;
-        margin: 0.2rem 0 !important;
-        line-height: 1.3;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
-    
-    .cart-item-price {
-        font-size: 0.85rem !important;
-        font-weight: bold !important;
-        margin-top: 0.25rem;
-    }
-    
-    /* Contrôles de quantité en bas */
-    .quantity-controls {
-        justify-content: center;
-        margin-top: 0.5rem;
-        padding-top: 0.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .quantity-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 0.8rem;
-    }
-    
-    .quantity-value {
-        min-width: 40px;
-        font-size: 1rem;
-        font-weight: 600;
-    }
-    
-    /* Bouton supprimer en position absolue */
-    .remove-item {
-        position: absolute;
-        top: 0.5rem;
-        right: 0.5rem;
-        width: 32px;
-        height: 32px;
-        font-size: 0.75rem;
-    }
-    
-    /* Panier vide responsive */
-    .empty-cart {
-        padding: 2rem 1rem !important;
-    }
-    
-    .empty-cart i {
-        font-size: 3rem !important;
-    }
-    
-    .empty-cart h3 {
-        font-size: 1.1rem !important;
-        margin-bottom: 0.5rem !important;
-    }
-    
-    .empty-cart p {
-        font-size: 0.9rem !important;
-        line-height: 1.4;
-    }
-}
-
-/* Responsive pour très petits écrans (360px et moins) */
-@media (max-width: 360px) {
-    .cart-item {
-        padding: 0.4rem;
-    }
-    
-    .cart-item-image {
-        width: 50px;
-        height: 50px;
-    }
-    
-    .cart-item-name {
-        font-size: 0.85rem;
-    }
-    
-    .cart-item-description {
-        font-size: 0.7rem !important;
-    }
-    
-    .cart-item-price {
-        font-size: 0.8rem !important;
-    }
-    
-    .quantity-btn {
-        width: 32px;
-        height: 32px;
-    }
-    
-    .quantity-value {
-        min-width: 35px;
-        font-size: 0.9rem;
-    }
-    
-    .remove-item {
-        width: 28px;
-        height: 28px;
-        font-size: 0.7rem;
-    }
-}
-
-            .cart-item-image {
-                width: 50px;
-                height: 50px;
-                font-size: 1.2rem;
-            }
-
-            .cart-item-info {
-                flex: 1;
-                min-width: 150px;
-            }
-
-            .quantity-controls {
-                justify-content: flex-start;
-            }
-
-            .remove-item {
-                width: 30px;
-                height: 30px;
-                align-self: flex-start;
-            }
-
-            .order-modal-content {
-                padding: 2rem 1.5rem;
-                margin: 1rem;
-                max-width: calc(100vw - 2rem);
-            }
-
-            .form-actions {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .form-btn {
-                width: 100%;
-            }
-
-            footer {
-                padding: 3rem 1rem 2rem;
-            }
-.mobile-nav{
-    margin-top: 0px;
-    background-color: rgba(0, 0, 0, 0.39);
-}
-#mobileMenuBtn{
-    margin-top: -200PX;
-}
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-            }
-            /* input{
-                width: 100%;
-                margin-top: 50px;
-            } */
-
-            .social-icons {
-                justify-content: center;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                margin-top: 10rem;
-            }
-
-            .hero-stats {
-                grid-template-columns: 1fr;
-                gap: 0.75rem;
-            }
-
-            .trust-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .product-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .cart-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-
-            .cart-item-image {
-                width: 100%;
-                height: 120px;
-                align-self: center;
-            }
-
-            .quantity-controls {
-                align-self: center;
-            }
-
-            .remove-item {
-                align-self: center;
-            }
-        }
-
-        /* Tablet adjustments */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .navbar {
-                padding: 1rem 1.5rem;
-            }
-.mobile-nav{
-    display: block;
-}
-            .hero-stats {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .product-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-
-            .trust-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 1400px) {
-            .hero h1 {
-                font-size: 5rem;
-            }
-
-            .section-title {
-                font-size: 4rem;
-            }
-
-            .category-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
         * {
-            will-change: auto;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .cart-icon,
-        .cta-button,
-        .quick-add-btn {
-            will-change: transform;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
         }
 
-        /* Accessibility improvements */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-
-        /* Focus styles */
-        button:focus-visible,
-        input:focus-visible,
-        textarea:focus-visible {
-            outline: 2px solid var(--accent-color);
-            outline-offset: 2px;
-        }
-
-        @media (prefers-contrast: high) {
-            :root {
-                --glass-bg: rgba(255, 255, 255, 0.2);
-                --glass-border: rgba(255, 255, 255, 0.4);
-            }
-        }
-        .navbar{
+        .activation-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
             width: 100%;
+            padding: 50px 40px;
+            text-align: center;
+            animation: slideIn 0.5s ease-out;
         }
 
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .lock-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+        }
+
+        .input-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            display: block;
+            text-align: left;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .activate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+        }
+
+        .activate-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .activate-btn:active {
+            transform: translateY(0);
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-weight: bold;
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .message.warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 2px solid #ffeeba;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .help-text {
+            color: #999;
+            font-size: 0.9em;
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .help-text a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .help-text a:hover {
+            text-decoration: underline;
+        }
+
+        .loading {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .example-key {
+            background: #f8f9fa;
+            border: 1px dashed #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            color: #667eea;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+
+        .license-success-box {
+            background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .license-success-box h3 {
+            color: white;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .generated-key {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.5em;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin: 20px 0;
+            word-break: break-all;
+        }
+
+        .copy-key-btn {
+            background: white;
+            color: #4caf50;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: all 0.3s;
+        }
+
+        .copy-key-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .copy-key-btn.copied {
+            background: #2196f3;
+            color: white;
+        }
+
+        .email-note {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+            font-size: 0.95em;
+        }
+        /* Animation de transition */
+.tous, .container {
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Style pour l'écran d'authentification */
+.activation-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+    padding: 50px 40px;
+    text-align: center;
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Message d'erreur */
+.message {
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    font-weight: bold;
+    display: none;
+    animation: fadeIn 0.3s;
+}
+
+.message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
     </style>
-<body >
-    <header id="header">
-        <nav class="navbar">
-            <div style="display: flex; align-items: center; gap: 1rem; flex: 1;">
-                <div class="logo" onclick="scrollToSection('hero')">Brayano</div>
-                <div class="nav-search">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="Rechercher des produits..." aria-label="Rechercher">
-                </div>
-            </div>
-            
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu" aria-expanded="false" aria-controls="mobileNav">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#hero" onclick="scrollToSection('hero')"><i class="fas fa-home"></i> Accueil</a></li>
-                <li><a href="#categories" onclick="scrollToSection('categories')"><i class="fas fa-th-large"></i> Catégories</a></li>
-                <li><a href="#promo" onclick="showPromoAlert()"><i class="fas fa-tags"></i> Promos</a></li>
-                <li><a href="#contact" onclick="scrollToSection('contact')"><i class="fas fa-envelope"></i> Contact</a></li>
-            </ul>
-            
-            <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-                <ul class="nav-links" id="navlink">
-                    <li id="but"><a href="#hero" onclick="scrollToSection('hero'); toggleMobileMenu()"><i class="fas fa-home"></i> Accueil</a></li>
-                    <li id="butt"><a href="#categories" onclick="scrollToSection('categories'); toggleMobileMenu()"><i class="fas fa-th-large"></i> Catégories</a></li>
-                    <li id="butto"><a href="#promo" onclick="showPromoAlert(); toggleMobileMenu()"><i class="fas fa-tags"></i> Promos</a></li>
-                    <li id="button"><a href="#contact" onclick="scrollToSection('contact'); toggleMobileMenu()"><i class="fas fa-envelope"></i> Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+</head>
 
-    <!-- Section Hero -->
-    <section id="hero" class="hero">
-        <div class="hero-content">
-            <h1>Shopping Premium Redéfini</h1>
-            <p class="hero-subtitle">
-                Découvrez une expérience d'achat unique avec des produits soigneusement sélectionnés 
-                et une livraison express partout au Cameroun
-            </p>
-
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">10K+</span>
-                    <span class="stat-label">Clients Satisfaits</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">500+</span>
-                    <span class="stat-label">Produits Premium</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">24h</span>
-                    <span class="stat-label">Livraison Express</span>
-                </div>
-            </div>
-
-            <div class="hero-cta">
-                <button class="cta-button" onclick="scrollToSection('categories')">
-                    <i class="fas fa-shopping-bag"></i>
-                    Explorer la Collection
-                </button>
-            </div>
+<body>
+   <div class="tous" style="display: block;">
+    <div class="activation-container">
+        <div class="lock-icon">🔐</div>
+        <h1 id="pageTitle">Activation de la Formation</h1>
+        <p class="subtitle">Entrez votre clé de licence pour accéder à la formation complète</p>
+        <div class="input-group">
+            <label for="licenseKey">Clé de Licence</label>
+            <input type="text" id="licenseKey" name="licenseKey" placeholder="XXXX-XXXX-XXXX-XXXX" maxlength="19" autocomplete="off">
         </div>
-    </section>
-
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Trust Indicators -->
-        <div class="categories">
-            <div class="trust-section animate-in">
-                <div class="trust-grid">
-                    <div class="trust-item">
-                        <div class="trust-icon"><i class="fas fa-shipping-fast"></i></div>
-                        <div class="trust-title">Livraison Express</div>
-                        <p>Livraison en 24h à Douala et Yaoundé</p>
-                    </div>
-                    <div class="trust-item">
-                        <div class="trust-icon"><i class="fas fa-shield-alt"></i></div>
-                        <div class="trust-title">Paiement Sécurisé</div>
-                        <p>Transactions 100% sécurisées et garanties</p>
-                    </div>
-                    <div class="trust-item">
-                        <div class="trust-icon"><i class="fas fa-undo"></i></div>
-                        <div class="trust-title">Retour Gratuit</div>
-                        <p>Retour sous 30 jours sans frais</p>
-                    </div>
-                    <div class="trust-item">
-                        <div class="trust-icon"><i class="fas fa-headset"></i></div>
-                        <div class="trust-title">Support 24/7</div>
-                        <p>Service client disponible jour et nuit</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sections Catégories -->
-        <div id="categories" class="categories">
-            <div class="section-header animate-in">
-                <h2 class="section-title">Nos Collections Premium</h2>
-                <p class="section-subtitle">
-                    Découvrez notre gamme soigneusement sélectionnée de produits haut de gamme
-                </p>
-            </div>
-
-            <div class="category-grid">
-                <!-- Mode & Beauté -->
-                <div class="category-card animate-in">
-                    <div class="category-icon"><i class="fas fa-tshirt"></i></div>
-                    <h3>Mode & Beauté</h3>
-                    <p>
-                        Collections tendance, cosmétiques premium et accessoires de style pour 
-                        sublimer votre look au quotidien
-                    </p>
-                    <div class="product-grid">
-                        <!-- Les fiches produits seront générées par JavaScript -->
-                    </div>
-                </div>
-
-                <!-- Tech & Gaming -->
-                <div class="category-card animate-in">
-                    <div class="category-icon"><i class="fas fa-gamepad"></i></div>
-                    <h3>Tech & Gaming</h3>
-                    <p>
-                        Dernières innovations technologiques, consoles gaming et accessoires 
-                        high-tech avec garantie officielle
-                    </p>
-                    <div class="product-grid">
-                        <!-- Les fiches produits seront générées par JavaScript -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Newsletter Section -->
-            <div class="newsletter-section animate-in">
-                <h3 style="color: white; font-size: clamp(1.5rem, 4vw, 2rem); margin-bottom: 1rem;">
-                    <i class="fas fa-envelope"></i> Restez Informé
-                </h3>
-                <p style="color: rgba(255, 255, 255, 0.8); font-size: clamp(1rem, 2.5vw, 1.1rem);">
-                    Recevez nos offres exclusives et les dernières nouveautés en avant-première
-                </p>
-                <form class="newsletter-form" onsubmit="handleNewsletter(event)">
-                    <input type="email" class="newsletter-input" placeholder="Votre adresse email" required>
-                    <button type="submit" class="newsletter-btn">
-                        <i class="fas fa-paper-plane"></i> S'abonner
-                    </button>
-                </form>
-            </div>
-        </div>
-    </main>
-
-    <!-- Icône du panier flottant -->
-    <div class="cart-icon" onclick="toggleCart()" role="button" aria-label="Ouvrir le panier" tabindex="0">
-        <i class="fas fa-shopping-cart"></i>
-        <div class="cart-count" id="cartCount" style="display: none;">0</div>
+        <button type="submit" class="activate-btn" id="activateBtn">
+            🚀 Activer Ma Formation
+        </button>
     </div>
+</div>
+            <script>
+               (function(){
+    const CLE_ACCES = 'Brayanoformation202';
+    const ACT_KEY = 'formationJsActivated';
+    const LICENSE_KEY = 'formationJsLicense';
 
-    <!-- Overlay du panier -->
-    <div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
-
-    <!-- Sidebar du panier -->
-    <div class="cart-sidebar" id="cartSidebar" role="dialog" aria-labelledby="cartTitle">
-        <div class="cart-header">
-            <h3 class="cart-title" id="cartTitle">
-                <i class="fas fa-shopping-bag"></i> Mon Panier
-            </h3>
-            <button class="cart-close" onclick="closeCart()" aria-label="Fermer le panier">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-
-        <div id="cartItems">
-            <div style="text-align: center; padding: 3rem 1rem; color: rgba(255, 255, 255, 0.7);">
-                <i class="fas fa-shopping-cart" style="font-size: 4rem; margin-bottom: 1rem; display: block; opacity: 0.5;"></i>
-                <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Panier vide</h3>
-                <p style="font-size: 1rem;">Découvrez nos produits premium et ajoutez vos favoris !</p>
-            </div>
-        </div>
-
-        <div class="cart-total" style="margin-top: -15px;">
-            <button class="clear-cart-btn" onclick="clearCart()">
-                <i class="fas fa-trash-alt"></i> Vider le panier
-            </button>
-            <div class="cart-total-price" id="cartTotal">
-                <i class="fas fa-coins"></i> Total: 0 FCFA
-            </div>
-            <button class="checkout-btn" style="height: 30px;" id="checkoutBtn" onclick="openOrderModal()" disabled>
-                <i class="fas fa-credit-card"></i> Commander Maintenant
-            </button>
-        </div>
-    </div>
-
-    <!-- Modal de commande -->
-    <div class="order-modal" id="orderModal" role="dialog" aria-labelledby="orderModalTitle">
-        <div class="order-modal-content">
-            <h3 id="orderModalTitle" style="color: white; text-align: center; margin-bottom: 2rem; font-size: 1.5rem;">
-                <i class="fas fa-clipboard-check"></i>
-                Finaliser votre commande
-            </h3>
-
-            <form class="order-form" id="orderForm" onsubmit="handleOrderSubmit(event)">
-                <div class="form-group">
-                    <label for="customerName">
-                        <i class="fas fa-user"></i> Nom complet *
-                    </label>
-                    <input type="text" id="customerName" required placeholder="Votre nom complet" autocomplete="name">
-                </div>
-
-                <div class="form-group">
-                    <label for="customerPhone">
-                        <i class="fas fa-phone"></i> Numéro de téléphone *
-                    </label>
-                    <input type="tel" id="customerPhone" required placeholder="+237 6XX XXX XXX" autocomplete="tel">
-                </div>
-
-                <div class="form-group">
-                    <label for="customerEmail">
-                        <i class="fas fa-envelope"></i> Email (optionnel)
-                    </label>
-                    <input type="email" id="customerEmail" placeholder="votre.email@example.com" autocomplete="email">
-                </div>
-
-                <div class="form-group">
-                    <label for="customerAddress">
-                        <i class="fas fa-map-marker-alt"></i> Adresse de livraison *
-                    </label>
-                    <textarea id="customerAddress" required placeholder="Votre adresse complète (quartier, ville)" rows="3" autocomplete="street-address"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="orderNotes">
-                        <i class="fas fa-sticky-note"></i> Notes sur la commande
-                    </label>
-                    <textarea id="orderNotes" placeholder="Instructions spéciales, préférences de livraison..." rows="2"></textarea>
-                </div>
-
-                <div class="form-actions">
-                    <button type="button" class="form-btn btn-cancel" onclick="closeOrderModal()">
-                        <i class="fas fa-times"></i> Annuler
-                    </button>
-                    <button type="submit" class="form-btn btn-confirm">
-                        <i class="fab fa-whatsapp"></i> Envoyer sur WhatsApp
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4><i class="fas fa-store"></i> Brayano Shop</h4>
-                <p style="line-height: 1.6; margin-bottom: 1rem;">
-                    Votre destination shopping premium au Cameroun. Nous sélectionnons les meilleurs 
-                    produits pour vous offrir une expérience d'achat exceptionnelle.
-                </p>
-                <div class="social-icons">
-                    <a href="https://www.facebook.com/profile.php?id=61566069248049" class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://wa.me/237657300644" target="_blank" class="social-icon" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
-
-            <div class="footer-section">
-                <h4><i class="fas fa-shopping-bag"></i> Shopping</h4>
-                <ul class="footer-links">
-                    <li><a href="#categories">Mode & Beauté</a></li>
-                    <li><a href="#categories">Tech & Gaming</a></li>
-                    <li><a href="#categories">Nouveautés</a></li>
-                    <li><a href="#categories">Meilleures Ventes</a></li>
-                    <li><a href="#categories">Offres Spéciales</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4><i class="fas fa-user-cog"></i> Service Client</h4>
-                <ul class="footer-links">
-                    <li><a href="#">Centre d'aide</a></li>
-                    <li><a href="#">Suivi de commande</a></li>
-                    <li><a href="#">Retours & échanges</a></li>
-                    <li><a href="#">Garantie produits</a></li>
-                    <li><a href="#">Guide des tailles</a></li>
-                    <li><a href="#">FAQ</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4><i class="fas fa-map-marker-alt"></i> Contact</h4>
-                <div style="color: rgba(255, 255, 255, 0.8); line-height: 1.8; font-size: 0.95rem;">
-                    <p><i class="fas fa-map-marker-alt" style="width: 20px;"></i> Douala, Littoral, Cameroun</p>
-                    <p><i class="fas fa-phone" style="width: 20px;"></i> +237 657 300 644</p>
-                    <p><i class="fas fa-envelope" style="width: 20px;"></i> ulrichbrayan@gmail.com</p>
-                    <p><i class="fas fa-clock" style="width: 20px;"></i> Lun-Sam: 8h-20h</p>
-                    <p><i class="fab fa-whatsapp" style="width: 20px; color: #25D366;"></i> Service WhatsApp 24/7</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <p>&copy; 2024 Brayano Shop Cameroun. Tous droits réservés. | 
-                <a href="#" style="color: var(--accent-color); text-decoration: none;">Conditions d'utilisation</a> | 
-                <a href="#" style="color: var(--accent-color); text-decoration: none;">Politique de confidentialité</a>
-            </p>
-        </div>
-    </footer>
-
-    <script>
-      // Configuration globale
-let cart = [];
-const WHATSAPP_NUMBER = "237657300644";
-
-// Base de données centralisée des produits
-const products = [
-    {
-        id: 'prod-001',
-        name: 'Adidas Nike Air Max',
-        price: 6000,
-        category: 'Mode',
-        image: "https://i.postimg.cc/g009F9yB/IMG-20250831-WA0011.jpg",
-        description: "Chaussures premium avec technologie Air Max.",
-        rating: 4.8
-    },
-    {
-        id: 'prod-002',
-        name: 'Chaussures de ville',
-        price: 6000,
-        category: 'Mode',
-        image: "https://i.postimg.cc/ZnGsC2dZ/IMG-20250822-WA0029.jpg",
-        description: "Élégance et confort pour toutes les occasions.",
-        rating: 4.8
-    },
-    {
-        id: 'prod-003',
-        name: 'Baskets stylées',
-        price: 6000,
-        category: 'Mode',
-        image: "https://i.postimg.cc/R01m912N/IMG-20250831-WA0010.jpg",
-        description: "Un look moderne et une démarche assurée.",
-        rating: 4.8
-    },
-    {
-        id: 'prod-004',
-        name: 'Adidas Classic',
-        price: 6000,
-        category: 'Tech',
-        image: "https://i.postimg.cc/90CrCFxj/IMG-20250831-WA0014.jpg",
-        description: "Un style intemporel et un confort exceptionnel.",
-        rating: 4.8,
-        badge: 'Nouveau'
-    },
-    {
-        id: 'prod-005',
-        name: 'Chaussure durable',
-        price: 6000,
-        category: 'Tech',
-        image: "https://i.postimg.cc/85qmHWPm/IMG-20250831-WA0013.jpg",
-        description: "Chaussure nouvelle génération avec languette.",
-        rating: 4.9,
-        badge: 'Gaming'
-    },
-    {
-        id: 'prod-006',
-        name: 'Chaussures dernier cri',
-        price: 8000,
-        category: 'Tech',
-        image: "https://i.postimg.cc/MGq7XdMR/IMG-20250831-WA0008.jpg",
-        description: "Ultra-portable avec languette, tissu solide Retina.",
-        rating: 4.5
-    }
-];
-
-// Fonctions utilitaires
-function formatPrice(price) {
-    return new Intl.NumberFormat('fr-FR', {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0
-    }).format(price) + ' FCFA';
-}
-
-function showNotification(message, type = 'success') {
-    const existingNotifications = document.querySelectorAll('.notification');
-    existingNotifications.forEach(notif => notif.remove());
-
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
-
-    const icon = type === 'success' ? 'fas fa-check-circle' : 'fas fa-exclamation-circle';
-    notification.innerHTML = `<i class="${icon}"></i><span>${message}</span>`;
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
-        if (notification.parentNode) {
-            notification.remove();
-        }
-    }, 6000);
-}
-
-function scrollToSection(sectionId) {
-    const element = document.getElementById(sectionId);
-    if (element) {
-        const headerHeight = document.getElementById('header').offsetHeight;
-        const elementPosition = element.offsetTop - headerHeight - 20;
-        window.scrollTo({ top: elementPosition, behavior: 'smooth' });
-    }
-}
-
-// Gestion du menu mobile
-function toggleMobileMenu() {
-    const mobileNav = document.getElementById('mobileNav');
-    const menuBtn = document.getElementById('mobileMenuBtn');
-    const isOpen = mobileNav.classList.toggle('open');
-    menuBtn.setAttribute('aria-expanded', isOpen);
-    menuBtn.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-}
-
-function showPromoAlert() {
-    showNotification('Aucune promotion disponible pour le moment 🎯', 'error');
-}
-
-// Gestion du panier
-function addToCart(productId) {
-    const product = products.find(p => p.id === productId);
-    if (!product) return;
-
-    const existingItem = cart.find(item => item.id === productId);
-
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({ ...product, quantity: 1 });
-    }
-
-    updateCartUI();
-    showNotification(`${product.name} ajouté au panier !`, 'success');
-    saveCartToCache();
-
-    const cartIcon = document.querySelector('.cart-icon');
-    cartIcon.style.transform = 'scale(1.15)';
-    setTimeout(() => { cartIcon.style.transform = ''; }, 300);
-}
-
-function removeFromCart(productId) {
-    cart = cart.filter(item => item.id !== productId);
-    updateCartUI();
-    showNotification('Produit retiré du panier', 'error');
-    saveCartToCache();
-}
-
-function updateQuantity(productId, change) {
-    const item = cart.find(item => item.id === productId);
-    if (item) {
-        item.quantity += change;
-        if (item.quantity <= 0) {
-            removeFromCart(productId);
-        } else {
-            updateCartUI();
-            saveCartToCache();
+    function readLocalDB() {
+        try { 
+            return JSON.parse(localStorage.getItem('licensesDB') || '{}'); 
+        } catch(e) { 
+            return {}; 
         }
     }
-}
 
-function updateCartUI() {
-    const cartCount = document.getElementById('cartCount');
-    const cartItems = document.getElementById('cartItems');
-    const cartTotal = document.getElementById('cartTotal');
-    const checkoutBtn = document.getElementById('checkoutBtn');
-
-    const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-    cartCount.textContent = totalItems;
-    cartCount.style.display = totalItems > 0 ? 'flex' : 'none';
-
-    const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-    cartTotal.innerHTML = `<i class="fas fa-coins"></i> Total: ${formatPrice(totalPrice)}`;
-
-    checkoutBtn.disabled = cart.length === 0;
-
-    if (cart.length === 0) {
-        cartItems.innerHTML = `
-            <div style="text-align: center; padding: 3rem 1rem; color: rgba(255, 255, 255, 0.7);">
-                <i class="fas fa-shopping-cart" style="font-size: 4rem; margin-bottom: 1rem; display: block; opacity: 0.5;"></i>
-                <h3 style="margin-bottom: 0.5rem; font-size: 1.2rem;">Panier vide</h3>
-                <p style="font-size: 1rem;">Découvrez nos produits premium et ajoutez vos favoris !</p>
-            </div>
-        `;
-    } else {
-        cartItems.innerHTML = cart.map(item => `
-            <div class="cart-item">
-                <div class="cart-item-image" style="background-image: url('${item.image}');"></div>
-                <div class="cart-item-info">
-                    <div class="cart-item-name">${item.name}</div>
-                    <div style="font-size: 0.8rem; opacity: 0.8; margin: 0.3rem 0;">${item.description}</div>
-                    <div style="color: var(--accent-color); font-weight: bold; font-size: 0.9rem;">${formatPrice(item.price)}</div>
-                    <div class="quantity-controls">
-                        <button class="quantity-btn" onclick="updateQuantity('${item.id}', -1)" aria-label="Diminuer">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <span class="quantity-value">${item.quantity}</span>
-                        <button class="quantity-btn" onclick="updateQuantity('${item.id}', 1)" aria-label="Augmenter">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-                <button class="remove-item" onclick="removeFromCart('${item.id}')" title="Supprimer" aria-label="Supprimer ${item.name}">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            </div>
-        `).join('');
-    }
-}
-
-function toggleCart() {
-    const cartSidebar = document.getElementById('cartSidebar');
-    const cartOverlay = document.getElementById('cartOverlay');
-    const isOpen = cartSidebar.classList.contains('open');
-    if (isOpen) {
-        closeCart();
-    } else {
-        cartSidebar.classList.add('open');
-        cartOverlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-function closeCart() {
-    document.getElementById('cartSidebar').classList.remove('open');
-    document.getElementById('cartOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-}
-
-function clearCart() {
-    if (cart.length > 0 && confirm('Êtes-vous sûr de vouloir vider votre panier ?')) {
-        cart = [];
-        updateCartUI();
-        saveCartToCache();
-        showNotification('Panier vidé', 'error');
-    }
-}
-
-function openOrderModal() {
-    if (cart.length === 0) return;
-    document.getElementById('orderModal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => document.getElementById('customerName').focus(), 100);
-}
-
-function closeOrderModal() {
-    document.getElementById('orderModal').classList.remove('open');
-    document.body.style.overflow = '';
-    document.getElementById('orderForm').reset();
-}
-
-function generateWhatsAppMessage() {
-    const name = document.getElementById('customerName').value.trim();
-    const phone = document.getElementById('customerPhone').value.trim();
-    const email = document.getElementById('customerEmail').value.trim();
-    const address = document.getElementById('customerAddress').value.trim();
-    const notes = document.getElementById('orderNotes').value.trim();
-
-    let message = `🛍️ *NOUVELLE COMMANDE - BRAYANO SHOP*\n═══════════════════════════\n\n`;
-    message += `👤 *INFORMATIONS CLIENT*\n▪️ Nom: ${name}\n▪️ Téléphone: ${phone}\n`;
-    if (email) message += `▪️ Email: ${email}\n`;
-    message += `▪️ Adresse: ${address}\n\n🛒 *DÉTAILS DE LA COMMANDE*\n═══════════════════════════\n`;
-
-    let total = 0;
-    cart.forEach((item, index) => {
-        const itemTotal = item.price * item.quantity;
-        total += itemTotal;
-        message += `\n${index + 1}. *${item.name}*\n   💰 Prix: ${formatPrice(item.price)}\n   📦 Qté: ${item.quantity}\n   💳 Sous-total: ${formatPrice(itemTotal)}\n`;
-    });
-
-    message += `\n═══════════════════════════\n💰 *TOTAL GÉNÉRAL: ${formatPrice(total)}*\n═══════════════════════════\n\n`;
-    if (notes) message += `📝 *NOTES SPÉCIALES:*\n${notes}\n\n`;
-    message += `⏰ *Commande passée le:* ${new Date().toLocaleString('fr-FR', { timeZone: 'Africa/Douala' })}\n`;
-    message += `🌐 *Via:* Brayano Shop Premium\n🚚 *Livraison:* Express 24h à Douala/Yaoundé`;
-
-    return message;
-}
-
-function handleOrderSubmit(e) {
-    e.preventDefault();
-    const name = document.getElementById('customerName').value.trim();
-    const phone = document.getElementById('customerPhone').value.trim();
-    const address = document.getElementById('customerAddress').value.trim();
-
-    if (!name || !phone || !address) {
-        return showNotification('Veuillez remplir tous les champs obligatoires', 'error');
-    }
-    if (!/^(\+237|237)?[6-9]\d{8}$/.test(phone.replace(/\s/g, ''))) {
-        return showNotification('Numéro de téléphone invalide. Format attendu: +237 6XX XXX XXX', 'error');
+    function isExpired(iso) {
+        if (!iso) return false;
+        try { 
+            return new Date(iso).getTime() <= Date.now(); 
+        } catch(e) { 
+            return false; 
+        }
     }
 
-    const encodedMessage = encodeURIComponent(generateWhatsAppMessage());
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`, '_blank');
-
-    cart = [];
-    updateCartUI();
-    saveCartToCache();
-    closeOrderModal();
-    closeCart();
-    showNotification('Commande envoyée sur WhatsApp ! Notre équipe vous contactera.', 'success');
-}
-
-function handleNewsletter(e) {
-    e.preventDefault();
-    const email = e.target.querySelector('input[type="email"]').value.trim();
-    if (email && email.includes('@')) {
-        showNotification('Merci de votre inscription à notre newsletter !', 'success');
-        e.target.reset();
-    } else {
-        showNotification('Veuillez entrer une adresse email valide', 'error');
+    function isValidLicense(key) {
+        if (!key) return false;
+        key = key.trim();
+        if (key === CLE_ACCES) return true;
+        const db = readLocalDB();
+        if (db && db[key] && db[key].actif) return true;
+        
+        // Vérifier la licence sauvegardée
+        try {
+            const saved = JSON.parse(localStorage.getItem(LICENSE_KEY) || '{}');
+            if (saved && saved.licenseKey === key && !isExpired(saved.expiresAt)) {
+                return true;
+            }
+        } catch(e) {}
+        return false;
     }
-}
 
-// Gestion du cache local
-const LocalCache = {
-    set: (key, data) => { try { localStorage.setItem(`brayano_${key}`, JSON.stringify(data)); } catch (e) { console.warn('Cache local non disponible'); } },
-    get: (key) => { try { return JSON.parse(localStorage.getItem(`brayano_${key}`)); } catch (e) { return null; } }
-};
-
-function saveCartToCache() {
-    LocalCache.set('cart', cart);
-}
-
-function loadCartFromCache() {
-    const cachedCart = LocalCache.get('cart');
-    if (cachedCart && Array.isArray(cachedCart)) {
-        cart = cachedCart;
-        updateCartUI();
+    function saveActivation(key) {
+        const now = Date.now();
+        const expiresMs = 365 * 24 * 60 * 60 * 1000; // 1 an
+        const activationData = {
+            licenseKey: key,
+            activatedAt: new Date(now).toISOString(),
+            expiresAt: new Date(now + expiresMs).toISOString()
+        };
+        localStorage.setItem(LICENSE_KEY, JSON.stringify(activationData));
+        localStorage.setItem(ACT_KEY, 'true');
     }
-}
 
-// Génération dynamique des produits
-function generateProductCards() {
-    const grids = document.querySelectorAll('.product-grid');
-    grids.forEach(grid => {
-        const parentCategoryCard = grid.closest('.category-card');
-        if (!parentCategoryCard) return;
-
-        const categoryName = parentCategoryCard.querySelector('h3').textContent;
-        const categoryProducts = products.filter(p => {
-            if (categoryName.includes('Mode')) return p.category === 'Mode';
-            if (categoryName.includes('Tech')) return p.category === 'Tech';
-            return false;
+    function showContent() {
+        // Afficher la formation
+        const containers = document.querySelectorAll('.container');
+        containers.forEach(c => {
+            c.style.display = 'block';
         });
+        
+        // Masquer l'écran d'authentification
+        const wrapper = document.querySelector('.tous');
+        if (wrapper) wrapper.style.display = 'none';
+        
+        // Scroll en haut
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-        grid.innerHTML = categoryProducts.map(product => {
-            const ratingHtml = Array.from({ length: 5 }, (_, i) => 
-                `<i class="fas fa-star${i < Math.round(product.rating) ? '' : '-half-alt'}"></i>`
-            ).join('');
+    function showAuthScreen() {
+        // Afficher l'écran d'authentification
+        const wrapper = document.querySelector('.tous');
+        if (wrapper) wrapper.style.display = 'block';
+        
+        // Masquer la formation
+        const containers = document.querySelectorAll('.container');
+        containers.forEach(c => {
+            c.style.display = 'none';
+        });
+    }
 
-            return `
-                <div class="product-card animate-in" data-id="${product.id}">
-                    ${product.badge ? `<div class="product-badge">${product.badge}</div>` : ''}
-                    <div class="product-image" style="background-image: url('${product.image}');"></div>
-                    <div class="product-info">
-                        <div class="product-name">${product.name}</div>
-                        <div class="product-description">${product.description}</div>
-                        <div class="product-price-section">
-                            <div class="product-price">${formatPrice(product.price)}</div>
-                            <div class="product-rating">${ratingHtml}<span>(${product.rating})</span></div>
-                        </div>
-                    </div>
-                    <button class="quick-add-btn"><i class="fas fa-cart-plus"></i> Ajouter</button>
-                </div>
-            `;
-        }).join('');
+    // Vérification automatique au chargement
+    document.addEventListener('DOMContentLoaded', function(){
+        if (localStorage.getItem(ACT_KEY) === 'true') {
+            try {
+                const saved = JSON.parse(localStorage.getItem(LICENSE_KEY) || '{}');
+                if (saved.licenseKey && !isExpired(saved.expiresAt) && isValidLicense(saved.licenseKey)) {
+                    showContent();
+                    return;
+                } else {
+                    // Licence expirée ou invalide
+                    localStorage.removeItem(ACT_KEY);
+                    localStorage.removeItem(LICENSE_KEY);
+                    showAuthScreen();
+                }
+            } catch(e) { 
+                console.warn('Erreur vérification licence:', e);
+                showAuthScreen();
+            }
+        } else {
+            showAuthScreen();
+        }
     });
-}
 
-// Initialisation au chargement de la page
-document.addEventListener('DOMContentLoaded', function() {
-    generateProductCards();
-    loadCartFromCache();
+    // Gestion du bouton d'activation
+    const activateBtn = document.getElementById('activateBtn');
+    const licenseInput = document.getElementById('licenseKey');
 
-    // Effet de scroll sur le header
-    window.addEventListener('scroll', () => {
-        document.getElementById('header').classList.toggle('scrolled', window.scrollY > 100);
-    }, { passive: true });
-
-    // Menu mobile
-    document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
-    document.querySelectorAll('.mobile-nav a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (document.getElementById('mobileNav').classList.contains('open')) {
-                toggleMobileMenu();
+    if (activateBtn && licenseInput) {
+        activateBtn.addEventListener('click', function(){
+            const key = (licenseInput.value || '').trim();
+            
+            if (!key) { 
+                alert('Erreur: La clé de licence ne peut pas être vide.'); 
+                licenseInput.focus(); 
+                return; 
+            }
+            
+            if (isValidLicense(key)) {
+                saveActivation(key);
+                alert('Félicitations! Votre formation a été activée avec succès.');
+                showContent();
+            } else {
+                alert('Erreur: Clé de licence invalide. Veuillez réessayer.');
             }
         });
-    });
 
-    // Animation d'entrée des éléments
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('visible');
+        // Activation avec la touche Entrée
+        licenseInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                activateBtn.click();
+            }
         });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-    document.querySelectorAll('.animate-in').forEach(el => observer.observe(el));
+    }
+})();
+            </script>
 
-    // Ajout des événements sur les boutons et cartes
-    document.body.addEventListener('click', function(e) {
-        const addButton = e.target.closest('.quick-add-btn');
-        if (addButton) {
-            e.stopPropagation();
-            const productId = addButton.closest('.product-card').dataset.id;
-            if (productId) addToCart(productId);
-        }
-    });
-
-    // Gestion du clavier pour l'accessibilité
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            if (document.getElementById('orderModal').classList.contains('open')) closeOrderModal();
-            else if (document.getElementById('cartSidebar').classList.contains('open')) closeCart();
-        }
-    });
-
-    // Recherche (simulation)
-    const searchInput = document.querySelector('.nav-search input');
-    let searchTimeout;
-    searchInput.addEventListener('input', (e) => {
-        clearTimeout(searchTimeout);
-        const query = e.target.value.trim().toLowerCase();
-        if (query.length > 2) {
-            searchTimeout = setTimeout(() => {
-                const suggestions = products.filter(p => p.name.toLowerCase().includes(query));
-                if (suggestions.length > 0) {
-                    showNotification(`${suggestions.length} produit(s) trouvé(s) pour "${query}"`, 'success');
-                }
-            }, 300);
-        }
-    });
-
-    showNotification("Pour tous vos besoins de création de site web, contactez-moi 👇");
-    console.log('🛍️ Brayano Shop - Site initialisé avec succès');
-});
-
-// Gestion des erreurs globales
-window.addEventListener('error', (e) => {
-    console.error('Erreur JavaScript:', e.error);
-    showNotification('Une erreur est survenue. Veuillez actualiser la page.', 'error');
-});
-window.addEventListener('online', () => showNotification('Connexion rétablie', 'success'));
-window.addEventListener('offline', () => showNotification('Connexion perdue. Certaines fonctionnalités peuvent être limitées.', 'error'));
-
-    </script>
+           
 </body>
 
+</html>
+    <div class="container" style="display: none;">
+        <header>
+            <h1>🚀 Formation JavaScript Complète</h1>
+            <p>De débutant à expert - ES6+ et bonnes pratiques modernes</p>
+        </header>
+
+        <nav class="nav">
+            <ul>
+                <li><a href="#intro">Introduction</a></li>
+                <li><a href="#bases">Bases</a></li>
+                <li><a href="#structures">Structures de contrôle</a></li>
+                <li><a href="#fonctions">Fonctions</a></li>
+                <li><a href="#tableaux">Tableaux</a></li>
+                <li><a href="#objets">Objets</a></li>
+                <li><a href="#dom">DOM</a></li>
+                <li><a href="#evenements">Événements</a></li>
+                <li><a href="#poo">POO ES6</a></li>
+                <li><a href="#async">Asynchrone</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <!-- INTRODUCTION -->
+            <section id="intro">
+                <h2>📚 Introduction à JavaScript</h2>
+                
+                <h3>Qu'est-ce que JavaScript ?</h3>
+                <p>
+                    JavaScript est un langage de programmation interprété, principalement utilisé pour rendre les pages web interactives. 
+                    Créé en 1995 par Brendan Eich, il est devenu l'un des langages les plus populaires au monde.
+                </p>
+
+                <div class="info-box">
+                    <strong>💡 Points clés :</strong>
+                    <ul>
+                        <li>Langage interprété par le navigateur</li>
+                        <li>Dynamique et non typé</li>
+                        <li>Multi-paradigme (procédural, objet, fonctionnel)</li>
+                        <li>ECMAScript 6 (ES6/ES2015) : révolution majeure</li>
+                        <li>Utilisé côté client (navigateur) et serveur (Node.js)</li>
+                    </ul>
+                </div>
+
+                <h3>Configuration de l'environnement</h3>
+                <div class="grid-2">
+                    <div>
+                        <h4>Éditeur de code recommandé</h4>
+                        <ul>
+                            <li>Visual Studio Code</li>
+                            <li>Sublime Text</li>
+                            <li>WebStorm</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Navigateur avec DevTools</h4>
+                        <ul>
+                            <li>Chrome (F12 ou Ctrl+Shift+I)</li>
+                            <li>Firefox (F12 ou Ctrl+Shift+K)</li>
+                            <li>Safari (Cmd+Option+I)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Intégrer JavaScript dans HTML</h3>
+                
+                <div class="code-block">// 1. Script inline (déconseillé)
+&lt;button onclick="alert('Clic!')"&gt;Cliquer&lt;/button&gt;
+
+// 2. Script interne
+&lt;script&gt;
+    console.log('Hello World!');
+&lt;/script&gt;
+
+// 3. Script externe (recommandé)
+&lt;script src="script.js"&gt;&lt;/script&gt;</div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Bonne pratique :</strong> Placez toujours vos balises &lt;script&gt; juste avant la fermeture de &lt;/body&gt; 
+                    pour permettre au HTML de charger en premier.
+                </div>
+            </section>
+
+            <!-- BASES -->
+            <section id="bases">
+                <h2>🎯 Les Bases du Langage</h2>
+
+                <h3>Variables et Constantes</h3>
+                
+                <div class="code-block">// let : variable locale (bloc)
+let nom = "Alice";
+let age = 25;
+
+// const : constante (ne peut pas être réassignée)
+const PI = 3.14159;
+
+// var : ancienne syntaxe (éviter)
+var ancien = "obsolète";</div>
+
+                <div class="warning-box">
+                    <strong>⚠️ Important :</strong> Utilisez toujours <code class="code-inline">const</code> par défaut, 
+                    et <code class="code-inline">let</code> uniquement si la valeur doit changer. N'utilisez jamais <code class="code-inline">var</code>.
+                </div>
+
+                <h3>Types de Données</h3>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Description</th>
+                            <th>Exemple</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Number</strong></td>
+                            <td>Nombres entiers et décimaux</td>
+                            <td><code class="code-inline">42, 3.14, -7</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>String</strong></td>
+                            <td>Chaînes de caractères</td>
+                            <td><code class="code-inline">"Hello", 'World'</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Boolean</strong></td>
+                            <td>Vrai ou faux</td>
+                            <td><code class="code-inline">true, false</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Undefined</strong></td>
+                            <td>Variable non initialisée</td>
+                            <td><code class="code-inline">undefined</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Null</strong></td>
+                            <td>Valeur nulle intentionnelle</td>
+                            <td><code class="code-inline">null</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Object</strong></td>
+                            <td>Collections de données</td>
+                            <td><code class="code-inline">{}, []</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="example">
+                    <div class="example-title">📋 Exemple pratique : typeof</div>
+                    <div class="code-block">console.log(typeof 42);        // "number"
+console.log(typeof "Hello");   // "string"
+console.log(typeof true);      // "boolean"
+console.log(typeof {});        // "object"
+console.log(typeof []);        // "object"
+console.log(typeof null);      // "object" (bug historique!)</div>
+                    <button onclick="demoTypeof()">Tester typeof</button>
+                    <div id="demo-typeof" class="demo-area"></div>
+                </div>
+
+                <h3>Opérateurs</h3>
+
+                <h4>Opérateurs Arithmétiques</h4>
+                <div class="code-block">let a = 10, b = 3;
+
+console.log(a + b);   // 13 (addition)
+console.log(a - b);   // 7  (soustraction)
+console.log(a * b);   // 30 (multiplication)
+console.log(a / b);   // 3.333... (division)
+console.log(a % b);   // 1  (modulo - reste)
+console.log(a ** b);  // 1000 (puissance)</div>
+
+                <h4>Opérateurs de Comparaison</h4>
+                <div class="code-block">// Égalité faible (avec conversion de type)
+console.log(5 == "5");    // true
+
+// Égalité stricte (sans conversion)
+console.log(5 === "5");   // false
+
+// Inégalité
+console.log(5 != "6");    // true
+console.log(5 !== "5");   // true
+
+// Comparaisons
+console.log(5 > 3);       // true
+console.log(5 <= 5);      // true</div>
+
+                <div class="success-box">
+                    <strong>✅ Bonne pratique :</strong> Utilisez toujours <code class="code-inline">===</code> et 
+                    <code class="code-inline">!==</code> pour éviter les conversions implicites.
+                </div>
+
+                <h3>Template Literals (ES6)</h3>
+                <div class="code-block">const nom = "Alice";
+const age = 25;
+
+// Ancienne méthode
+console.log("Je m'appelle " + nom + " et j'ai " + age + " ans");
+
+// Template literals (recommandé)
+console.log(`Je m'appelle ${nom} et j'ai ${age} ans`);
+
+// Multi-lignes
+const texte = `
+    Ceci est un texte
+    sur plusieurs lignes
+    avec ${nom}
+`;</div>
+
+                <div class="example">
+                    <div class="example-title">📋 Calculatrice Simple</div>
+                    <input type="number" id="calc-a" placeholder="Nombre 1" value="10">
+                    <select id="calc-op">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="*">×</option>
+                        <option value="/">÷</option>
+                    </select>
+                    <input type="number" id="calc-b" placeholder="Nombre 2" value="5">
+                    <button onclick="calculer()">Calculer</button>
+                    <div id="calc-result" class="demo-area"></div>
+                </div>
+            </section>
+
+            <!-- STRUCTURES DE CONTRÔLE -->
+            <section id="structures">
+                <h2>🔀 Structures de Contrôle</h2>
+
+                <h3>Conditions : if / else if / else</h3>
+                <div class="code-block">const age = 18;
+
+if (age < 13) {
+    console.log("Enfant");
+} else if (age < 18) {
+    console.log("Adolescent");
+} else if (age < 60) {
+    console.log("Adulte");
+} else {
+    console.log("Senior");
+}</div>
+
+                <h3>Opérateur Ternaire</h3>
+                <div class="code-block">const age = 20;
+const statut = age >= 18 ? "Majeur" : "Mineur";
+
+// Équivalent à :
+// let statut;
+// if (age >= 18) {
+//     statut = "Majeur";
+// } else {
+//     statut = "Mineur";
+// }</div>
+
+                <h3>Switch</h3>
+                <div class="code-block">const jour = 3;
+let nomJour;
+
+switch(jour) {
+    case 1:
+        nomJour = "Lundi";
+        break;
+    case 2:
+        nomJour = "Mardi";
+        break;
+    case 3:
+        nomJour = "Mercredi";
+        break;
+    default:
+        nomJour = "Autre jour";
+}</div>
+
+                <div class="example">
+                    <div class="example-title">📋 Vérification d'âge</div>
+                    <input type="number" id="age-input" placeholder="Entrez votre âge" value="25">
+                    <button onclick="verifierAge()">Vérifier</button>
+                    <div id="age-result" class="demo-area"></div>
+                </div>
+
+                <h3>Boucles</h3>
+
+                <h4>Boucle For</h4>
+                <div class="code-block">// Boucle classique
+for (let i = 0; i < 5; i++) {
+    console.log(`Itération ${i}`);
+}
+
+// Parcourir un tableau
+const fruits = ["Pomme", "Banane", "Orange"];
+for (let i = 0; i < fruits.length; i++) {
+    console.log(fruits[i]);
+}</div>
+
+                <h4>Boucle While</h4>
+                <div class="code-block">let compteur = 0;
+
+while (compteur < 5) {
+    console.log(compteur);
+    compteur++;
+}
+
+// Do...while (exécute au moins une fois)
+do {
+    console.log("Exécuté au moins une fois");
+} while (false);</div>
+
+                <h4>For...of et For...in (ES6)</h4>
+                <div class="code-block">const fruits = ["Pomme", "Banane", "Orange"];
+
+// for...of : parcourt les valeurs
+for (const fruit of fruits) {
+    console.log(fruit);
+}
+
+// for...in : parcourt les indices/clés
+for (const index in fruits) {
+    console.log(`${index}: ${fruits[index]}`);
+}</div>
+
+                <div class="example">
+                    <div class="example-title">📋 Table de Multiplication</div>
+                    <input type="number" id="table-num" placeholder="Nombre" value="7" min="1" max="20">
+                    <button onclick="afficherTable()">Générer la table</button>
+                    <div id="table-result" class="demo-area"></div>
+                </div>
+            </section>
+
+            <!-- FONCTIONS -->
+            <section id="fonctions">
+                <h2>⚙️ Fonctions</h2>
+
+                <h3>Déclaration de Fonction</h3>
+                <div class="code-block">// Déclaration classique
+function saluer(nom) {
+    return `Bonjour ${nom}!`;
+}
+
+console.log(saluer("Alice")); // "Bonjour Alice!"
+
+// Fonction avec valeur par défaut (ES6)
+function direBonjour(nom = "Invité") {
+    return `Bonjour ${nom}!`;
+}
+
+console.log(direBonjour());        // "Bonjour Invité!"
+console.log(direBonjour("Bob"));   // "Bonjour Bob!"</div>
+
+                <h3>Expression de Fonction</h3>
+                <div class="code-block">const addition = function(a, b) {
+    return a + b;
+};
+
+console.log(addition(5, 3)); // 8</div>
+
+                <h3>Fonctions Flèches (Arrow Functions ES6)</h3>
+                <div class="code-block">// Syntaxe complète
+const multiplier = (a, b) => {
+    return a * b;
+};
+
+// Syntaxe courte (return implicite)
+const multiplier2 = (a, b) => a * b;
+
+// Un seul paramètre (parenthèses optionnelles)
+const carre = x => x * x;
+
+// Pas de paramètre
+const direBonjour = () => "Bonjour!";
+
+console.log(multiplier(4, 5));  // 20
+console.log(carre(5));          // 25</div>
+
+                <div class="info-box">
+                    <strong>💡 Différence importante :</strong> Les fonctions flèches n'ont pas leur propre <code class="code-inline">this</code>. 
+                    Elles héritent du <code class="code-inline">this</code> du contexte parent.
+                </div>
+
+                <h3>Fonctions d'Ordre Supérieur</h3>
+                <div class="code-block">// Fonction qui retourne une fonction
+function creerMultiplicateur(facteur) {
+    return function(nombre) {
+        return nombre * facteur;
+    };
+}
+
+const doubler = creerMultiplicateur(2);
+const tripler = creerMultiplicateur(3);
+
+console.log(doubler(5));  // 10
+console.log(tripler(5));  // 15
+
+// Version avec arrow function
+const creerMultiplicateur2 = facteur => nombre => nombre * facteur;</div>
+
+                <h3>Rest Parameters et Spread Operator (ES6)</h3>
+                <div class="code-block">// Rest parameters (...args)
+function somme(...nombres) {
+    return nombres.reduce((total, n) => total + n, 0);
+}
+
+console.log(somme(1, 2, 3, 4, 5)); // 15
+
+// Spread operator
+const nombres = [1, 2, 3];
+const autresNombres = [4, 5, 6];
+const tous = [...nombres, ...autresNombres];
+console.log(tous); // [1, 2, 3, 4, 5, 6]</div>
+
+                <div class="example">
+                    <div class="example-title">📋 Calculateur de Moyenne</div>
+                    <input type="text" id="notes-input" placeholder="Entrez des notes (séparées par des virgules)" value="15, 12, 18, 14">
+                    <button onclick="calculerMoyenne()">Calculer la moyenne</button>
+                    <div id="moyenne-result" class="demo-area"></div>
+                </div>
+
+                <h3>Scope (Portée des Variables)</h3>
+                <div class="code-block">const global = "Je suis globale";
+
+function exemple() {
+    const locale = "Je suis locale";
+    console.log(global);  // Accessible
+    console.log(locale);  // Accessible
+    
+    if (true) {
+        const bloc = "Je suis dans le bloc";
+        console.log(bloc);  // Accessible
+    }
+    
+    // console.log(bloc);  // Erreur! Pas accessible
+}
+
+// console.log(locale);  // Erreur! Pas accessible</div>
+            </section>
+
+            <!-- TABLEAUX -->
+            <section id="tableaux">
+                <h2>📊 Tableaux (Arrays)</h2>
+
+                <h3>Création et Manipulation de Base</h3>
+                <div class="code-block">// Création
+const fruits = ["Pomme", "Banane", "Orange"];
+const nombres = [1, 2, 3, 4, 5];
+const mixte = [1, "texte", true, null, {nom: "objet"}];
+
+// Accès aux éléments
+console.log(fruits[0]);        // "Pomme"
+console.log(fruits.length);    // 3
+
+// Modification
+fruits[1] = "Fraise";
+console.log(fruits);  // ["Pomme", "Fraise", "Orange"]</div>
+
+                <h3>Méthodes Essentielles</h3>
+
+                <h4>Ajouter / Supprimer des Éléments</h4>
+                <div class="code-block">const arr = [1, 2, 3];
+
+// Ajouter à la fin
+arr.push(4);           // [1, 2, 3, 4]
+
+// Retirer de la fin
+arr.pop();             // [1, 2, 3]
+
+// Ajouter au début
+arr.unshift(0);        // [0, 1, 2, 3]
+
+// Retirer du début
+arr.shift();           // [1, 2, 3]
+
+// Ajouter/supprimer au milieu
+arr.splice(1, 1, 5, 6);  // [1, 5, 6, 3]</div>
+
+                <h4>Méthodes de Recherche</h4>
+                <div class="code-block">const fruits = ["Pomme", "Banane", "Orange", "Banane"];
+
+// indexOf - premier index
+fruits.indexOf("Banane");     // 1
+
+// lastIndexOf - dernier index
+fruits.lastIndexOf("Banane"); // 3
+
+// includes - vérifier présence
+fruits.includes("Orange");    // true
+
+// find - premier élément qui satisfait
+const nombres = [5, 12, 8, 130, 44];
+const trouve = nombres.find(n => n > 10);
+console.log(trouve);  // 12
+
+// findIndex - index du premier élément
+const index = nombres.findIndex(n => n > 10);
+console.log(index);   // 1</div>
+
+                <h3>Méthodes Modernes (ES6+)</h3>
+
+                <h4>map() - Transformer chaque élément</h4>
+                <div class="code-block">const nombres = [1, 2, 3, 4, 5];
+
+// Doubler chaque nombre
+const doubles = nombres.map(n => n * 2);
+console.log(doubles);  // [2, 4, 6, 8, 10]
+
+// Créer des objets
+const personnes = ["Alice", "Bob", "Charlie"];
+const objets = personnes.map((nom, index) => ({
+    id: index + 1,
+    nom: nom
+}));
+console.log(objets);
+// [{id: 1, nom: "Alice"}, {id: 2, nom: "Bob"}, ...]</div>
+
+                <h4>filter() - Filtrer les éléments</h4>
+                <div class="code-block">const nombres = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// Garder seulement les pairs
+const pairs = nombres.filter(n => n % 2 === 0);
+console.log(pairs);  // [2, 4, 6, 8, 10]
+
+// Filtrer les étudiants admis
+const etudiants = [
+    {nom: "Alice", note: 15},
+    {nom: "Bob", note: 8},
+    {nom: "Charlie", note: 12}
+];
+const admis = etudiants.filter(e => e.note >= 10);
+console.log(admis);</div>
+
+                <h4>reduce() - Réduire à une valeur</h4>
+                <div class="code-block">const nombres = [1, 2, 3, 4, 5];
+
+// Somme
+const somme = nombres.reduce((acc, n) => acc + n, 0);
+console.log(somme);  // 15
+
+// Produit
+const produit = nombres.reduce((acc, n) => acc * n, 1);
+console.log(produit);  // 120
+
+// Compter occurrences
+const fruits = ["pomme", "banane", "pomme", "orange", "banane", "pomme"];
+const compte = fruits.reduce((acc, fruit) => {
+    acc[fruit] = (acc[fruit] || 0) + 1;
+    return acc;
+}, {});
+console.log(compte);  // {pomme: 3, banane: 2, orange: 1}</div>
+
+                <h4>forEach() - Itérer sur chaque élément</h4>
+                <div class="code-block">const fruits = ["Pomme", "Banane", "Orange"];
+
+fruits.forEach((fruit, index) => {
+    console.log(`${index + 1}. ${fruit}`);
+});
+// 1. Pomme
+// 2. Banane
+// 3. Orange</div>
+
+                <h4>some() et every() - Tests sur tableau</h4>
+                <div class="code-block">const nombres = [1, 2, 3, 4, 5];
+
+// some() - au moins un élément satisfait
+const aUnPair = nombres.some(n => n % 2 === 0);
+console.log(aUnPair);  // true
+
+// every() - tous les éléments satisfont
+const tousPositifs = nombres.every(n => n > 0);
+console.log(tousPositifs);  // true</div>
+
+                <h4>sort() - Trier un tableau</h4>
+                <div class="code-block">// Tri alphabétique (par défaut)
+const fruits = ["Orange", "Pomme", "Banane"];
+fruits.sort();
+console.log(fruits);  // ["Banane", "Orange", "Pomme"]
+
+// Tri numérique
+const nombres = [40, 100, 1, 5, 25, 10];
+nombres.sort((a, b) => a - b);  // Croissant
+console.log(nombres);  // [1, 5, 10, 25, 40, 100]
+
+// Tri décroissant
+nombres.sort((a, b) => b - a);
+console.log(nombres);  // [100, 40, 25, 10, 5, 1]
+
+// Tri d'objets
+const personnes = [
+    {nom: "Charlie", age: 30},
+    {nom: "Alice", age: 25},
+    {nom: "Bob", age: 35}
+];
+personnes.sort((a, b) => a.age - b.age);
+console.log(personnes);</div>
+
+                <div class="example">
+                    <div class="example-title">📋 Gestionnaire de Tâches</div>
+                    <input type="text" id="tache-input" placeholder="Nouvelle tâche">
+                    <button onclick="ajouterTache()">Ajouter</button>
+                    <button onclick="filtrerTaches()">Filtrer (A-M)</button>
+                    <button onclick="trierTaches()">Trier A-Z</button>
+                    <button onclick="viderTaches()">Vider</button>
+                    <div id="taches-result" class="demo-area"></div>
+                </div>
+
+                <h3>Destructuration de Tableau (ES6)</h3>
+                <div class="code-block">// Destructuration simple
+const [premier, deuxieme, troisieme] = [1, 2, 3];
+console.log(premier);  // 1
+console.log(deuxieme); // 2
+
+// Ignorer des éléments
+const [a, , c] = [1, 2, 3];
+console.log(c);  // 3
+
+// Rest operator
+const [first, ...rest] = [1, 2, 3, 4, 5];
+console.log(first);  // 1
+console.log(rest);   // [2, 3, 4, 5]
+
+// Échange de variables
+let x = 1, y = 2;
+[x, y] = [y, x];
+console.log(x, y);  // 2, 1</div>
+            </section>
+
+            <!-- OBJETS -->
+            <section id="objets">
+                <h2>🎁 Objets (Objects)</h2>
+
+                <h3>Création d'Objets</h3>
+                <div class="code-block">// Objet littéral
+const personne = {
+    nom: "Alice",
+    age: 25,
+    ville: "Paris",
+    estEtudiant: true
+};
+
+// Accès aux propriétés
+console.log(personne.nom);        // "Alice"
+console.log(personne["age"]);     // 25
+
+// Modification
+personne.age = 26;
+personne["ville"] = "Lyon";
+
+// Ajout de propriété
+personne.email = "alice@example.com";
+
+// Suppression
+delete personne.estEtudiant;</div>
+
+                <h3>Méthodes d'Objet</h3>
+                <div class="code-block">const calculatrice = {
+    valeur: 0,
+    
+    // Méthode classique
+    ajouter: function(n) {
+        this.valeur += n;
+        return this;  // Chaînage
+    },
+    
+    // Syntaxe courte (ES6)
+    soustraire(n) {
+        this.valeur -= n;
+        return this;
+    },
+    
+    multiplier(n) {
+        this.valeur *= n;
+        return this;
+    },
+    
+    resultat() {
+        return this.valeur;
+    }
+};
+
+// Chaînage de méthodes
+const result = calculatrice
+    .ajouter(10)
+    .multiplier(2)
+    .soustraire(5)
+    .resultat();
+console.log(result);  // 15</div>
+
+                <h3>Propriétés Calculées (ES6)</h3>
+                <div class="code-block">const cle = "couleur";
+const valeur = "bleu";
+
+const objet = {
+    [cle]: valeur,           // couleur: "bleu"
+    ["age" + "Max"]: 100,    // ageMax: 100
+    ["total" + (1 + 1)]: 42  // total2: 42
+};
+
+console.log(objet.couleur);  // "bleu"
+console.log(objet.ageMax);   // 100</div>
+
+                <h3>Destructuration d'Objet (ES6)</h3>
+                <div class="code-block">const personne = {
+    nom: "Alice",
+    age: 25,
+    ville: "Paris",
+    pays: "France"
+};
+
+// Destructuration simple
+const {nom, age} = personne;
+console.log(nom);  // "Alice"
+console.log(age);  // 25
+
+// Renommer les variables
+const {nom: prenom, age: annees} = personne;
+console.log(prenom);  // "Alice"
+
+// Valeur par défaut
+const {profession = "Inconnu"} = personne;
+console.log(profession);  // "Inconnu"
+
+// Rest operator
+const {ville, ...reste} = personne;
+console.log(reste);  // {nom: "Alice", age: 25, pays: "France"}</div>
+
+                <h3>Spread Operator pour Objets (ES6)</h3>
+                <div class="code-block">const obj1 = {a: 1, b: 2};
+const obj2 = {c: 3, d: 4};
+
+// Fusion d'objets
+const fusion = {...obj1, ...obj2};
+console.log(fusion);  // {a: 1, b: 2, c: 3, d: 4}
+
+// Copie avec modification
+const personne = {nom: "Alice", age: 25};
+const personneModifiee = {...personne, age: 26, ville: "Paris"};
+console.log(personneModifiee);
+// {nom: "Alice", age: 26, ville: "Paris"}</div>
+
+                <h3>Méthodes Object Utiles</h3>
+                <div class="code-block">const personne = {
+    nom: "Alice",
+    age: 25,
+    ville: "Paris"
+};
+
+// Object.keys() - Tableau des clés
+console.log(Object.keys(personne));
+// ["nom", "age", "ville"]
+
+// Object.values() - Tableau des valeurs
+console.log(Object.values(personne));
+// ["Alice", 25, "Paris"]
+
+// Object.entries() - Tableau de paires [clé, valeur]
+console.log(Object.entries(personne));
+// [["nom", "Alice"], ["age", 25], ["ville", "Paris"]]
+
+// Object.assign() - Copie d'objet
+const copie = Object.assign({}, personne);
+
+// Object.freeze() - Rendre immuable
+Object.freeze(personne);
+// personne.age = 30;  // Ne fait rien en mode strict</div>
+
+                <h3>JSON - JavaScript Object Notation</h3>
+                <div class="code-block">const personne = {
+    nom: "Alice",
+    age: 25,
+    hobbies: ["lecture", "sport"]
+};
+
+// Convertir en JSON (string)
+const json = JSON.stringify(personne);
+console.log(json);
+// '{"nom":"Alice","age":25,"hobbies":["lecture","sport"]}'
+
+// Parser le JSON
+const parsed = JSON.parse(json);
+console.log(parsed.nom);  // "Alice"
+
+// Avec indentation (lisible)
+const jsonFormate = JSON.stringify(personne, null, 2);
+console.log(jsonFormate);</div>
+
+                <div class="example">
+                    <div class="example-title">📋 Carnet d'Adresses</div>
+                    <input type="text" id="contact-nom" placeholder="Nom">
+                    <input type="email" id="contact-email" placeholder="Email">
+                    <input type="tel" id="contact-tel" placeholder="Téléphone">
+                    <button onclick="ajouterContact()">Ajouter Contact</button>
+                    <div id="contacts-result" class="demo-area"></div>
+                </div>
+            </section>
+
+            <!-- DOM -->
+            <section id="dom">
+                <h2>🌳 DOM - Document Object Model</h2>
+
+                <h3>Qu'est-ce que le DOM ?</h3>
+                <p>
+                    Le DOM est une interface de programmation qui représente la structure HTML d'une page comme un arbre d'objets.
+                    JavaScript peut manipuler cet arbre pour modifier dynamiquement le contenu, la structure et le style de la page.
+                </p>
+
+                <h3>Sélectionner des Éléments</h3>
+                <div class="code-block">// Par ID (retourne un élément)
+const element = document.getElementById('monId');
+
+// Par classe (retourne une HTMLCollection)
+const elements = document.getElementsByClassName('maClasse');
+
+// Par balise (retourne une HTMLCollection)
+const paragraphes = document.getElementsByTagName('p');
+
+// Query Selector (CSS) - moderne et recommandé
+const premier = document.querySelector('.maClasse');  // Premier élément
+const tous = document.querySelectorAll('.maClasse');  // NodeList de tous
+
+// Sélecteurs CSS avancés
+document.querySelector('#monId .enfant');
+document.querySelectorAll('div > p');
+document.querySelector('[data-id="123"]');</div>
+
+                <div class="info-box">
+                    <strong>💡 Bonne pratique :</strong> Utilisez <code class="code-inline">querySelector</code> et 
+                    <code class="code-inline">querySelectorAll</code> pour une syntaxe moderne et cohérente.
+                </div>
+
+                <h3>Manipuler le Contenu</h3>
+                <div class="code-block">const element = document.querySelector('#monElement');
+
+// innerHTML - HTML complet (attention XSS!)
+element.innerHTML = '&lt;strong&gt;Texte en gras&lt;/strong&gt;';
+
+// textContent - Texte uniquement (sécurisé)
+element.textContent = 'Texte simple';
+
+// innerText - Texte visible (tient compte du CSS)
+element.innerText = 'Texte visible';
+
+// Lire le contenu
+const contenu = element.textContent;</div>
+
+                <h3>Manipuler les Attributs</h3>
+                <div class="code-block">const lien = document.querySelector('a');
+
+// getAttribute / setAttribute
+lien.setAttribute('href', 'https://example.com');
+const url = lien.getAttribute('href');
+
+// Propriétés directes
+lien.href = 'https://example.com';
+lien.target = '_blank';
+
+// Attributs data-*
+const element = document.querySelector('[data-id]');
+element.dataset.id = '123';
+element.dataset.userName = 'Alice';
+// &lt;div data-id="123" data-user-name="Alice"&gt;
+
+console.log(element.dataset.id);       // "123"
+console.log(element.dataset.userName); // "Alice"</div>
+
+                <h3>Manipuler les Classes CSS</h3>
+                <div class="code-block">const element = document.querySelector('.monElement');
+
+// classList - API moderne
+element.classList.add('nouvelle-classe');
+element.classList.remove('ancienne-classe');
+element.classList.toggle('actif');  // Ajoute si absent, retire si présent
+element.classList.contains('actif'); // true ou false
+
+// Plusieurs classes
+element.classList.add('classe1', 'classe2', 'classe3');
+
+// className - ancienne méthode (remplace tout)
+element.className = 'classe1 classe2';</div>
+
+                <h3>Manipuler les Styles</h3>
+                <div class="code-block">const element = document.querySelector('.monElement');
+
+// Styles inline
+element.style.color = 'red';
+element.style.backgroundColor = 'blue';
+element.style.fontSize = '20px';
+
+// CamelCase pour les propriétés CSS
+element.style.borderRadius = '10px';
+
+// Lire les styles
+const couleur = element.style.color;
+
+// getComputedStyle - styles calculés finaux
+const styles = window.getComputedStyle(element);
+const largeur = styles.width;</div>
+
+                <h3>Créer et Ajouter des Éléments</h3>
+                <div class="code-block">// Créer un élément
+const div = document.createElement('div');
+div.textContent = 'Nouveau div';
+div.classList.add('ma-classe');
+
+// Ajouter à la fin d'un parent
+const parent = document.querySelector('#container');
+parent.appendChild(div);
+
+// Ajouter au début
+parent.insertBefore(div, parent.firstChild);
+
+// Méthodes modernes (ES6)
+parent.append(div);           // Ajoute à la fin
+parent.prepend(div);          // Ajoute au début
+parent.before(div);           // Insère avant le parent
+parent.after(div);            // Insère après le parent
+
+// Supprimer un élément
+div.remove();
+
+// Remplacer un élément
+const nouveau = document.createElement('span');
+div.replaceWith(nouveau);</div>
+
+                <h3>Naviguer dans le DOM</h3>
+                <div class="code-block">const element = document.querySelector('.monElement');
+
+// Parents
+element.parentElement;          // Parent direct
+element.closest('.classe');     // Premier ancêtre correspondant
+
+// Enfants
+element.children;               // HTMLCollection des enfants
+element.firstElementChild;      // Premier enfant
+element.lastElementChild;       // Dernier enfant
+element.childElementCount;      // Nombre d'enfants
+
+// Frères et sœurs
+element.nextElementSibling;     // Élément suivant
+element.previousElementSibling; // Élément précédent</div>
+
+                <div class="example">
+                    <div class="example-title">📋 Manipulateur DOM Interactif</div>
+                    <div id="demo-dom-box" style="padding: 20px; background: #f0f0f0; border-radius: 5px; margin: 10px 0;">
+                        <p id="demo-dom-text">Texte à modifier</p>
+                    </div>
+                    <input type="text" id="dom-input" placeholder="Nouveau texte" value="Bonjour le DOM!">
+                    <button onclick="changerTexte()">Changer Texte</button>
+                    <button onclick="toggleClasse()">Toggle Classe</button>
+                    <button onclick="changerCouleur()">Changer Couleur</button>
+                    <button onclick="ajouterElement()">Ajouter Élément</button>
+                </div>
+            </section>
+
+            <!-- ÉVÉNEMENTS -->
+            <section id="evenements">
+                <h2>⚡ Gestion des Événements</h2>
+
+                <h3>addEventListener - Méthode Moderne</h3>
+                <div class="code-block">const bouton = document.querySelector('#monBouton');
+
+// Ajouter un écouteur d'événement
+bouton.addEventListener('click', function(event) {
+    console.log('Bouton cliqué!');
+    console.log('Élément:', event.target);
+});
+
+// Avec fonction flèche
+bouton.addEventListener('click', (e) => {
+    console.log('Clic!');
+});
+
+// Fonction nommée (pour pouvoir la retirer)
+function gererClic(e) {
+    console.log('Clic géré');
+}
+
+bouton.addEventListener('click', gererClic);
+
+// Retirer l'écouteur
+bouton.removeEventListener('click', gererClic);</div>
+
+                <h3>Événements Courants</h3>
+
+                <h4>Événements de Souris</h4>
+                <div class="code-block">element.addEventListener('click', e => {});      // Clic
+element.addEventListener('dblclick', e => {});   // Double-clic
+element.addEventListener('mouseenter', e => {}); // Survol (entre)
+element.addEventListener('mouseleave', e => {}); // Survol (sort)
+element.addEventListener('mousemove', e => {});  // Mouvement souris
+element.addEventListener('mousedown', e => {});  // Bouton pressé
+element.addEventListener('mouseup', e => {});    // Bouton relâché</div>
+
+                <h4>Événements de Clavier</h4>
+                <div class="code-block">input.addEventListener('keydown', e => {
+    console.log('Touche pressée:', e.key);
+});
+
+input.addEventListener('keyup', e => {
+    console.log('Touche relâchée:', e.key);
+});
+
+input.addEventListener('keypress', e => {
+    console.log('Caractère:', e.key);
+});</div>
+
+                <h4>Événements de Formulaire</h4>
+                <div class="code-block">const input = document.querySelector('input');
+const form = document.querySelector('form');
+
+input.addEventListener('input', e => {
+    console.log('Valeur:', e.target.value);
+});
+
+input.addEventListener('change', e => {
+    console.log('Changé:', e.target.value);
+});
+
+input.addEventListener('focus', e => {
+    console.log('Focus');
+});
+
+input.addEventListener('blur', e => {
+    console.log('Perte de focus');
+});
+
+form.addEventListener('submit', e => {
+    e.preventDefault();  // Empêche l'envoi du formulaire
+    console.log('Formulaire soumis');
+});</div>
+
+                <h3>Objet Event</h3>
+                <div class="code-block">element.addEventListener('click', (event) => {
+    // Élément qui a déclenché l'événement
+    console.log(event.target);
+    
+    // Élément sur lequel l'écouteur est attaché
+    console.log(event.currentTarget);
+    
+    // Type d'événement
+    console.log(event.type);  // "click"
+    
+    // Position de la souris
+    console.log(event.clientX, event.clientY);
+    
+    // Touches modifcatrices
+    console.log(event.ctrlKey, event.shiftKey, event.altKey);
+    
+    // Empêcher le comportement par défaut
+    event.preventDefault();
+    
+    // Arrêter la propagation
+    event.stopPropagation();
+});</div>
+
+                <h3>Propagation des Événements</h3>
+                <div class="code-block">// HTML: &lt;div id="parent"&gt;&lt;button id="enfant"&gt;Clic&lt;/button&gt;&lt;/div&gt;
+
+const parent = document.querySelector('#parent');
+const enfant = document.querySelector('#enfant');
+
+// Phase de capture (rare)
+parent.addEventListener('click', () => {
+    console.log('Parent - capture');
+}, true);
+
+// Phase de bouillonnement (par défaut)
+parent.addEventListener('click', () => {
+    console.log('Parent - bouillonnement');
+});
+
+enfant.addEventListener('click', (e) => {
+    console.log('Enfant cliqué');
+    // e.stopPropagation();  // Arrête la propagation
+});
+
+// Ordre: Capture parent -> Enfant -> Bouillonnement parent</div>
+
+                <h3>Délégation d'Événements</h3>
+                <div class="code-block">// Au lieu d'ajouter un écouteur sur chaque élément
+const liste = document.querySelector('#maListe');
+
+liste.addEventListener('click', (e) => {
+    // Vérifier si c'est un élément &lt;li&gt; qui a été cliqué
+    if (e.target.tagName === 'LI') {
+        console.log('Item cliqué:', e.target.textContent);
+        e.target.classList.toggle('actif');
+    }
+});
+
+// Avantages:
+// - Un seul écouteur au lieu de plusieurs
+// - Fonctionne pour les éléments ajoutés dynamiquement</div>
+
+                <div class="example">
+                    <div class="example-title">📋 Compteur de Clics Interactif</div>
+                    <div id="compteur-display" style="font-size: 2em; text-align: center; margin: 20px 0;">0</div>
+                    <button onclick="incrementerCompteur()">+1</button>
+                    <button onclick="decrementerCompteur()">-1</button>
+                    <button onclick="resetCompteur()">Reset</button>
+                    <button onclick="multiplierCompteur()">×2</button>
+                </div>
+
+                <div class="example">
+                    <div class="example-title">📋 Liste Interactive avec Délégation</div>
+                    <input type="text" id="item-input" placeholder="Nouvel item">
+                    <button onclick="ajouterItem()">Ajouter</button>
+                    <ul id="liste-interactive" style="list-style: none; padding: 0; margin: 15px 0;"></ul>
+                </div>
+            </section>
+
+            <!-- POO ES6 -->
+            <section id="poo">
+                <h2>🎓 Programmation Orientée Objet (ES6)</h2>
+
+                <h3>Classes (ES6)</h3>
+                <div class="code-block">class Personne {
+    // Constructeur
+    constructor(nom, age) {
+        this.nom = nom;
+        this.age = age;
+    }
+    
+    // Méthode
+    sePresenter() {
+        return `Je m'appelle ${this.nom} et j'ai ${this.age} ans.`;
+    }
+    
+    // Méthode
+    vieillir() {
+        this.age++;
+    }
+    
+    // Getter
+    get majeur() {
+        return this.age >= 18;
+    }
+    
+    // Setter
+    set anniversaire(date) {
+        const annee = new Date(date).getFullYear();
+        this.age = new Date().getFullYear() - annee;
+    }
+    
+    // Méthode statique
+    static creerEnfant(nom) {
+        return new Personne(nom, 0);
+    }
+}
+
+// Utilisation
+const alice = new Personne('Alice', 25);
+console.log(alice.sePresenter());
+alice.vieillir();
+console.log(alice.majeur);  // true
+
+const bebe = Personne.creerEnfant('Bob');</div>
+
+                <h3>Héritage</h3>
+                <div class="code-block">class Personne {
+    constructor(nom, age) {
+        this.nom = nom;
+        this.age = age;
+    }
+    
+    sePresenter() {
+        return `Je m'appelle ${this.nom}`;
+    }
+}
+
+class Etudiant extends Personne {
+    constructor(nom, age, ecole) {
+        super(nom, age);  // Appel du constructeur parent
+        this.ecole = ecole;
+        this.notes = [];
+    }
+    
+    // Surcharge de méthode
+    sePresenter() {
+        return `${super.sePresenter()} et j'étudie à ${this.ecole}`;
+    }
+    
+    ajouterNote(note) {
+        this.notes.push(note);
+    }
+    
+    calculerMoyenne() {
+        if (this.notes.length === 0) return 0;
+        const somme = this.notes.reduce((acc, note) => acc + note, 0);
+        return somme / this.notes.length;
+    }
+}
+
+// Utilisation
+const etudiant = new Etudiant('Alice', 20, 'Sorbonne');
+console.log(etudiant.sePresenter());
+etudiant.ajouterNote(15);
+etudiant.ajouterNote(17);
+console.log(etudiant.calculerMoyenne());  // 16</div>
+
+                <h3>Propriétés Privées (ES2022)</h3>
+                <div class="code-block">class CompteBancaire {
+    // Propriété privée (commence par #)
+    #solde = 0;
+    
+    constructor(titulaire, soldeInitial = 0) {
+        this.titulaire = titulaire;
+        this.#solde = soldeInitial;
+    }
+    
+    // Méthode privée
+    #verifierSolde(montant) {
+        return this.#solde >= montant;
+    }
+    
+    deposer(montant) {
+        if (montant > 0) {
+            this.#solde += montant;
+            return true;
+        }
+        return false;
+    }
+    
+    retirer(montant) {
+        if (this.#verifierSolde(montant)) {
+            this.#solde -= montant;
+            return true;
+        }
+        return false;
+    }
+    
+    getSolde() {
+        return this.#solde;
+    }
+}
+
+const compte = new CompteBancaire('Alice', 1000);
+compte.deposer(500);
+console.log(compte.getSolde());  // 1500
+// console.log(compte.#solde);   // Erreur! Propriété privée</div>
+
+                <div class="example">
+                    <div class="example-title">📋 Gestionnaire de Livres (POO)</div>
+                    <input type="text" id="livre-titre" placeholder="Titre">
+                    <input type="text" id="livre-auteur" placeholder="Auteur">
+                    <input type="number" id="livre-pages" placeholder="Pages" min="1">
+                    <button onclick="ajouterLivre()">Ajouter Livre</button>
+                    <div id="livres-result" class="demo-area"></div>
+                </div>
+            </section>
+
+            <!-- ASYNCHRONE -->
+            <section id="async">
+                <h2>⏱️ JavaScript Asynchrone</h2>
+
+                <h3>setTimeout et setInterval</h3>
+                <div class="code-block">// setTimeout - exécute une fois après un délai
+setTimeout(() => {
+    console.log('Exécuté après 2 secondes');
+}, 2000);
+
+// Avec fonction nommée
+function afficherMessage() {
+    console.log('Message');
+}
+const timerId = setTimeout(afficherMessage, 3000);
+
+// Annuler le timeout
+clearTimeout(timerId);
+
+// setInterval - exécute répétitivement
+let compteur = 0;
+const intervalId = setInterval(() => {
+    compteur++;
+    console.log(`Compteur: ${compteur}`);
+    
+    if (compteur === 5) {
+        clearInterval(intervalId);  // Arrêter après 5 fois
+    }
+}, 1000);</div>
+
+                <h3>Callbacks</h3>
+                <div class="code-block">// Fonction avec callback
+function chargerDonnees(callback) {
+    setTimeout(() => {
+        const donnees = {nom: 'Alice', age: 25};
+        callback(donnees);
+    }, 1000);
+}
+
+// Utilisation
+chargerDonnees((resultat) => {
+    console.log('Données chargées:', resultat);
+});
+
+// Problème: Callback Hell (pyramide de l'enfer)
+chargerDonnees1((data1) => {
+    chargerDonnees2(data1, (data2) => {
+        chargerDonnees3(data2, (data3) => {
+            // Code difficile à lire et maintenir
+        });
+    });
+});</div>
+
+                <h3>Promises (ES6)</h3>
+                <div class="code-block">// Créer une Promise
+function chargerDonnees() {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const succes = true;
+            
+            if (succes) {
+                resolve({nom: 'Alice', age: 25});
+            } else {
+                reject(new Error('Échec du chargement'));
+            }
+        }, 1000);
+    });
+}
+
+// Utiliser une Promise
+chargerDonnees()
+    .then((donnees) => {
+        console.log('Succès:', donnees);
+        return donnees.age;
+    })
+    .then((age) => {
+        console.log('Âge:', age);
+    })
+    .catch((erreur) => {
+        console.error('Erreur:', erreur);
+    })
+    .finally(() => {
+        console.log('Terminé');
+    });</div>
+
+                <h3>Async/Await (ES2017)</h3>
+                <div class="code-block">// Fonction asynchrone
+async function chargerEtAfficher() {
+    try {
+        console.log('Chargement...');
+        const donnees = await chargerDonnees();
+        console.log('Données:', donnees);
+        
+        const autreDonnees = await chargerAutresDonnees();
+        console.log('Autres:', autreDonnees);
+        
+        return 'Tout chargé!';
+    } catch (erreur) {
+        console.error('Erreur:', erreur);
+    }
+}
+
+// Utilisation
+chargerEtAfficher()
+    .then(message => console.log(message));
+
+// Ou avec await au niveau supérieur (ES2022)
+const resultat = await chargerEtAfficher();</div>
+
+                <h3>Fetch API - Requêtes HTTP</h3>
+                <div class="code-block">// GET simple
+fetch('https://api.example.com/users')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Erreur:', error));
+
+// Avec async/await (recommandé)
+async function recupererUtilisateurs() {
+    try {
+        const response = await fetch('https://api.example.com/users');
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Erreur:', error);
+    }
+}
+
+// POST avec données
+async function creerUtilisateur(utilisateur) {
+    const response = await fetch('https://api.example.com/users', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(utilisateur)
+    });
+    
+    return await response.json();
+}
+
+// Utilisation
+creerUtilisateur({nom: 'Alice', age: 25});</div>
+
+                <h3>Promise.all et Promise.race</h3>
+                <div class="code-block">// Promise.all - Attendre toutes les promises
+const promise1 = fetch('url1').then(r => r.json());
+const promise2 = fetch('url2').then(r => r.json());
+const promise3 = fetch('url3').then(r => r.json());
+
+Promise.all([promise1, promise2, promise3])
+    .then(([data1, data2, data3]) => {
+        console.log('Toutes les données:', data1, data2, data3);
+    })
+    .catch(error => {
+        console.error('Au moins une a échoué:', error);
+    });
+
+// Promise.race - Première promise résolue
+Promise.race([promise1, promise2, promise3])
+    .then(data => {
+        console.log('Première arrivée:', data);
+    });
+
+// Promise.allSettled - Toutes, même en cas d'erreur
+Promise.allSettled([promise1, promise2, promise3])
+    .then(results => {
+        results.forEach(result => {
+            if (result.status === 'fulfilled') {
+                console.log('Succès:', result.value);
+            } else {
+                console.log('Échec:', result.reason);
+            }
+        });
+    });</div>
+
+                <div class="example">
+                    <div class="example-title">📋 Générateur de Citations (API)</div>
+                    <button onclick="chargerCitation()">Charger une Citation</button>
+                    <button onclick="chargerPlusieursCitations()">Charger 3 Citations</button>
+                    <div id="citations-result" class="demo-area"></div>
+                </div>
+
+                <div class="example">
+                    <div class="example-title">📋 Minuteur Interactif</div>
+                    <input type="number" id="timer-seconds" placeholder="Secondes" value="10" min="1" max="60">
+                    <button onclick="demarrerMinuteur()">Démarrer</button>
+                    <button onclick="arreterMinuteur()">Arrêter</button>
+                    <button onclick="resetMinuteur()">Reset</button>
+                    <div id="timer-display" style="font-size: 2em; text-align: center; margin: 10px 0;">00:00</div>
+                </div>
+            </section>
+
+            <!-- BONNES PRATIQUES -->
+            <section id="bonnes-pratiques">
+                <h2>✨ Bonnes Pratiques et Patterns</h2>
+
+                <h3>Conventions de Nommage</h3>
+                <div class="code-block">// Variables et fonctions : camelCase
+let monNom = "Alice";
+function calculerTotal() {}
+
+// Classes : PascalCase
+class MaClasse {}
+
+// Constantes : SCREAMING_SNAKE_CASE
+const API_URL = "https://api.example.com";
+const MAX_USERS = 100;
+
+// Variables privées : préfixe _
+class Exemple {
+    _variablePrivee = 42;
+}
+
+// Booléens : préfixes is, has, can
+let isActive = true;
+let hasPermission = false;
+let canEdit = true;</div>
+
+                <h3>Destructuration Avancée</h3>
+                <div class="code-block">// Paramètres de fonction avec destructuration
+function afficherPersonne({nom, age, ville = "Paris"}) {
+    console.log(`${nom}, ${age} ans, ${ville}`);
+}
+
+afficherPersonne({nom: "Alice", age: 25});
+
+// Swap de variables
+let a = 1, b = 2;
+[a, b] = [b, a];
+
+// Ignorer des valeurs
+const [premier, , troisieme] = [1, 2, 3];
+
+// Destructuration imbriquée
+const user = {
+    id: 1,
+    nom: "Alice",
+    adresse: {
+        ville: "Paris",
+        pays: "France"
+    }
+};
+
+const {nom, adresse: {ville}} = user;
+console.log(ville);  // "Paris"</div>
+
+                <h3>Gestion d'Erreurs</h3>
+                <div class="code-block">// Try-Catch
+function diviser(a, b) {
+    try {
+        if (b === 0) {
+            throw new Error("Division par zéro impossible");
+        }
+        return a / b;
+    } catch (error) {
+        console.error("Erreur:", error.message);
+        return null;
+    } finally {
+        console.log("Opération terminée");
+    }
+}
+
+// Erreurs personnalisées
+class ValidationError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "ValidationError";
+    }
+}
+
+function validerAge(age) {
+    if (age < 0) {
+        throw new ValidationError("L'âge ne peut pas être négatif");
+    }
+    if (age > 150) {
+        throw new ValidationError("L'âge n'est pas réaliste");
+    }
+    return true;
+}
+
+try {
+    validerAge(-5);
+} catch (error) {
+    if (error instanceof ValidationError) {
+        console.log("Erreur de validation:", error.message);
+    } else {
+        throw error;  // Relancer si ce n'est pas une ValidationError
+    }
+}</div>
+
+                <h3>Optional Chaining (?.) - ES2020</h3>
+                <div class="code-block">const user = {
+    nom: "Alice",
+    adresse: {
+        ville: "Paris"
+    }
+};
+
+// Sans optional chaining (risque d'erreur)
+// const code = user.adresse.codePostal.numero;  // TypeError!
+
+// Avec optional chaining
+const code = user.adresse?.codePostal?.numero;
+console.log(code);  // undefined (pas d'erreur)
+
+// Avec fonctions
+const resultat = user.getInfo?.();  // Appelle seulement si existe
+
+// Avec tableaux
+const premier = arr?.[0];  // Sécurisé</div>
+
+                <h3>Nullish Coalescing (??) - ES2020</h3>
+                <div class="code-block">// Différence entre || et ??
+
+// || retourne la droite si la gauche est "falsy"
+const valeur1 = 0 || 10;        // 10
+const valeur2 = "" || "texte";  // "texte"
+
+// ?? retourne la droite seulement si la gauche est null ou undefined
+const valeur3 = 0 ?? 10;        // 0
+const valeur4 = "" ?? "texte";  // ""
+const valeur5 = null ?? 10;     // 10
+const valeur6 = undefined ?? 10; // 10
+
+// Utile pour valeurs par défaut
+function saluer(nom) {
+    const nomFinal = nom ?? "Invité";
+    return `Bonjour ${nomFinal}`;
+}
+
+console.log(saluer());        // "Bonjour Invité"
+console.log(saluer("Alice")); // "Bonjour Alice"
+console.log(saluer(""));      // "Bonjour " (garde la chaîne vide)</div>
+
+                <h3>Module Pattern</h3>
+                <div class="code-block">// Créer un module avec portée privée
+const MonModule = (function() {
+    // Variables privées
+    let compteur = 0;
+    
+    // Fonctions privées
+    function incrementer() {
+        compteur++;
+    }
+    
+    // API publique
+    return {
+        ajouter: function() {
+            incrementer();
+            console.log(`Compteur: ${compteur}`);
+        },
+        
+        reset: function() {
+            compteur = 0;
+        },
+        
+        getCompteur: function() {
+            return compteur;
+        }
+    };
+})();
+
+MonModule.ajouter();  // Compteur: 1
+MonModule.ajouter();  // Compteur: 2
+console.log(MonModule.getCompteur());  // 2
+// console.log(MonModule.compteur);  // undefined (privé)</div>
+
+                <h3>Debounce et Throttle</h3>
+                <div class="code-block">// Debounce - Retarde l'exécution
+function debounce(func, delay) {
+    let timeoutId;
+    return function(...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+// Utilisation : recherche en temps réel
+const rechercheInput = document.querySelector('#recherche');
+const effectuerRecherche = debounce((terme) => {
+    console.log('Recherche:', terme);
+    // Appel API...
+}, 500);
+
+rechercheInput.addEventListener('input', (e) => {
+    effectuerRecherche(e.target.value);
+});
+
+// Throttle - Limite la fréquence d'exécution
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
+}
+
+// Utilisation : scroll event
+const handleScroll = throttle(() => {
+    console.log('Scroll détecté');
+}, 1000);
+
+window.addEventListener('scroll', handleScroll);</div>
+
+                <div class="success-box">
+                    <strong>✅ Résumé des Bonnes Pratiques :</strong>
+                    <ul>
+                        <li>Utilisez <code class="code-inline">const</code> par défaut, <code class="code-inline">let</code> si nécessaire</li>
+                        <li>Préférez <code class="code-inline">===</code> à <code class="code-inline">==</code></li>
+                        <li>Utilisez les fonctions flèches pour les callbacks courts</li>
+                        <li>Destructurez les objets et tableaux quand c'est pertinent</li>
+                        <li>Gérez toujours les erreurs (try-catch, .catch())</li>
+                        <li>Utilisez async/await plutôt que les callbacks</li>
+                        <li>Nommez vos variables et fonctions de manière descriptive</li>
+                        <li>Commentez le "pourquoi", pas le "quoi"</li>
+                        <li>Gardez vos fonctions courtes et focalisées</li>
+                        <li>Utilisez les DevTools pour déboguer</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- PROJETS PRATIQUES -->
+            <section id="projets">
+                <h2>🚀 Projets Pratiques Complets</h2>
+
+                <h3>Projet 1 : Todo List Complète</h3>
+                <div class="example">
+                    <div class="example-title">📋 Application Todo List</div>
+                    <div style="max-width: 600px; margin: 0 auto;">
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                            <input type="text" id="todo-input" placeholder="Nouvelle tâche..." style="flex: 1;">
+                            <button onclick="ajouterTodo()">Ajouter</button>
+                        </div>
+                        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+                            <button onclick="filtrerTodos('tous')">Tous</button>
+                            <button onclick="filtrerTodos('actifs')">Actifs</button>
+                            <button onclick="filtrerTodos('completes')">Complétés</button>
+                            <button onclick="viderCompletes()">Vider complétés</button>
+                        </div>
+                        <ul id="todo-liste" style="list-style: none; padding: 0;"></ul>
+                        <div id="todo-stats" style="text-align: center; margin-top: 15px; color: #666;"></div>
+                    </div>
+                </div>
+
+                <h3>Projet 2 : Calculatrice Avancée</h3>
+                <div class="example">
+                    <div class="example-title">🔢 Calculatrice Scientifique</div>
+                    <div style="max-width: 400px; margin: 0 auto;">
+                        <input type="text" id="calc-display" readonly style="width: 100%; font-size: 2em; text-align: right; padding: 10px; margin-bottom: 10px; background: #f0f0f0;">
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px;">
+                            <button onclick="ajouterCalcul('7')">7</button>
+                            <button onclick="ajouterCalcul('8')">8</button>
+                            <button onclick="ajouterCalcul('9')">9</button>
+                            <button onclick="ajouterCalcul('/')" style="background: #ff9800; color: white;">÷</button>
+                            <button onclick="ajouterCalcul('4')">4</button>
+                            <button onclick="ajouterCalcul('5')">5</button>
+                            <button onclick="ajouterCalcul('6')">6</button>
+                            <button onclick="ajouterCalcul('*')" style="background: #ff9800; color: white;">×</button>
+                            <button onclick="ajouterCalcul('1')">1</button>
+                            <button onclick="ajouterCalcul('2')">2</button>
+                            <button onclick="ajouterCalcul('3')">3</button>
+                            <button onclick="ajouterCalcul('-')" style="background: #ff9800; color: white;">-</button>
+                            <button onclick="ajouterCalcul('0')">0</button>
+                            <button onclick="ajouterCalcul('.')">.</button>
+                            <button onclick="calculerResultat()" style="background: #4caf50; color: white;">=</button>
+                            <button onclick="ajouterCalcul('+')" style="background: #ff9800; color: white;">+</button>
+                            <button onclick="effacerCalcul()" style="grid-column: 1 / 3; background: #f44336; color: white;">C</button>
+                            <button onclick="ajouterCalcul('Math.sqrt(')" style="grid-column: 3 / 5;">√</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RESSOURCES -->
+            <section id="ressources">
+                <h2>📚 Ressources et Références</h2>
+
+                <h3>Documentation Officielle</h3>
+                <ul>
+                    <li><strong>MDN Web Docs</strong> - Documentation la plus complète et fiable</li>
+                    <li><strong>JavaScript.info</strong> - Tutoriels modernes et détaillés</li>
+                    <li><strong>ECMAScript Specifications</strong> - Spécifications officielles</li>
+                </ul>
+
+                <h3>Outils de Développement</h3>
+                <ul>
+                    <li><strong>Chrome DevTools</strong> - Déboguer et profiler</li>
+                    <li><strong>VS Code</strong> - Éditeur recommandé avec extensions JS</li>
+                    <li><strong>Node.js</strong> - Exécuter JS côté serveur</li>
+                    <li><strong>npm</strong> - Gestionnaire de paquets</li>
+                </ul>
+
+                <h3>Frameworks et Bibliothèques Populaires</h3>
+                <div class="grid-2">
+                    <div>
+                        <h4>Frontend</h4>
+                        <ul>
+                            <li><strong>React</strong> - Bibliothèque UI (Facebook)</li>
+                            <li><strong>Vue.js</strong> - Framework progressif</li>
+                            <li><strong>Angular</strong> - Framework complet (Google)</li>
+                            <li><strong>Svelte</strong> - Compilateur moderne</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Backend</h4>
+                        <ul>
+                            <li><strong>Node.js</strong> - Runtime JavaScript</li>
+                            <li><strong>Express.js</strong> - Framework web</li>
+                            <li><strong>NestJS</strong> - Framework TypeScript</li>
+                            <li><strong>Deno</strong> - Runtime moderne</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Prochaines Étapes</h3>
+                <div class="info-box">
+                    <strong>Pour continuer votre apprentissage :</strong>
+                    <ol>
+                        <li><strong>TypeScript</strong> - Ajouter des types statiques à JavaScript</li>
+                        <li><strong>Testing</strong> - Jest, Mocha, Cypress pour tester votre code</li>
+                        <li><strong>Build Tools</strong> - Webpack, Vite, Parcel pour bundler</li>
+                        <li><strong>React/Vue/Angular</strong> - Apprendre un framework moderne</li>
+                        <li><strong>Node.js</strong> - Développement backend avec JavaScript</li>
+                        <li><strong>APIs REST/GraphQL</strong> - Créer et consommer des APIs</li>
+                        <li><strong>Bases de données</strong> - MongoDB, PostgreSQL avec JS</li>
+                    </ol>
+                </div>
+            </section>
+        </div>
+
+    </div>
+ <script src="protection.js"></script>
+    <script>
+        // Variables globales pour les exemples
+        let compteur = 0;
+        let taches = [];
+        let contacts = [];
+        let livres = [];
+        let timerInterval = null;
+        let timerSecondes = 0;
+
+        // Exemple: typeof
+        function demoTypeof() {
+            const result = document.getElementById('demo-typeof');
+            result.innerHTML = `
+                <strong>Résultats typeof:</strong><br>
+                typeof 42 = "${typeof 42}"<br>
+                typeof "Hello" = "${typeof "Hello"}"<br>
+                typeof true = "${typeof true}"<br>
+                typeof {} = "${typeof {}}"<br>
+                typeof [] = "${typeof []}"<br>
+                typeof null = "${typeof null}"<br>
+                typeof undefined = "${typeof undefined}"
+            `;
+        }
+
+        // Calculatrice simple
+        function calculer() {
+            const a = parseFloat(document.getElementById('calc-a').value);
+            const op = document.getElementById('calc-op').value;
+            const b = parseFloat(document.getElementById('calc-b').value);
+            let resultat;
+
+            switch(op) {
+                case '+': resultat = a + b; break;
+                case '-': resultat = a - b; break;
+                case '*': resultat = a * b; break;
+                case '/': resultat = b !== 0 ? a / b : 'Division par zéro!'; break;
+            }
+
+            document.getElementById('calc-result').innerHTML = `
+                <strong>Résultat:</strong> ${a} ${op} ${b} = ${resultat}
+            `;
+        }
+
+        // Vérification d'âge
+        function verifierAge() {
+            const age = parseInt(document.getElementById('age-input').value);
+            let message, couleur;
+
+            if (age < 0) {
+                message = "Âge invalide!";
+                couleur = "red";
+            } else if (age < 13) {
+                message = `${age} ans - Vous êtes un enfant`;
+                couleur = "blue";
+            } else if (age < 18) {
+                message = `${age} ans - Vous êtes un adolescent`;
+                couleur = "orange";
+            } else if (age < 60) {
+                message = `${age} ans - Vous êtes un adulte`;
+                couleur = "green";
+            } else {
+                message = `${age} ans - Vous êtes un senior`;
+                couleur = "purple";
+            }
+
+            const result = document.getElementById('age-result');
+            result.innerHTML = `<strong style="color: ${couleur}">${message}</strong>`;
+        }
+
+        // Table de multiplication
+        function afficherTable() {
+            const num = parseInt(document.getElementById('table-num').value);
+            let html = `<strong>Table de ${num}:</strong><br>`;
+
+            for (let i = 1; i <= 10; i++) {
+                html += `${num} × ${i} = ${num * i}<br>`;
+            }
+
+            document.getElementById('table-result').innerHTML = html;
+        }
+
+        // Calculateur de moyenne
+        function calculerMoyenne() {
+            const input = document.getElementById('notes-input').value;
+            const notes = input.split(',').map(n => parseFloat(n.trim())).filter(n => !isNaN(n));
+
+            if (notes.length === 0) {
+                document.getElementById('moyenne-result').innerHTML = 
+                    '<strong style="color: red;">Entrez des notes valides!</strong>';
+                return;
+            }
+
+            const somme = notes.reduce((acc, note) => acc + note, 0);
+            const moyenne = (somme / notes.length).toFixed(2);
+            const min = Math.min(...notes);
+            const max = Math.max(...notes);
+
+            document.getElementById('moyenne-result').innerHTML = `
+                <strong>Statistiques:</strong><br>
+                Notes: ${notes.join(', ')}<br>
+                Moyenne: <strong>${moyenne}/20</strong><br>
+                Min: ${min} | Max: ${max}<br>
+                Nombre de notes: ${notes.length}
+            `;
+        }
+
+        // Gestionnaire de tâches
+        function ajouterTache() {
+            const input = document.getElementById('tache-input');
+            const tache = input.value.trim();
+
+            if (tache) {
+                taches.push(tache);
+                input.value = '';
+                afficherTaches();
+            }
+        }
+
+        function filtrerTaches() {
+            const filtrees = taches.filter(t => t[0] >= 'A' && t[0] <= 'M');
+            const result = document.getElementById('taches-result');
+            result.innerHTML = '<strong>Tâches (A-M):</strong><br>' +
+                (filtrees.length > 0 ? filtrees.join('<br>') : 'Aucune tâche');
+        }
+
+        function trierTaches() {
+            taches.sort();
+            afficherTaches();
+        }
+
+        function viderTaches() {
+            taches = [];
+            afficherTaches();
+        }
+
+        function afficherTaches() {
+            const result = document.getElementById('taches-result');
+            result.innerHTML = '<strong>Tâches:</strong><br>' +
+                (taches.length > 0 ? taches.map((t, i) => `${i + 1}. ${t}`).join('<br>') : 'Aucune tâche');
+        }
+
+        // Manipulateur DOM
+        function changerTexte() {
+            const texte = document.getElementById('dom-input').value;
+            document.getElementById('demo-dom-text').textContent = texte;
+        }
+
+        function toggleClasse() {
+            const box = document.getElementById('demo-dom-box');
+            box.classList.toggle('highlight');
+            if (!document.querySelector('style#demo-style')) {
+                const style = document.createElement('style');
+                style.id = 'demo-style';
+                style.textContent = '.highlight { background: #ffeb3b !important; border: 3px solid #ff9800; }';
+                document.head.appendChild(style);
+            }
+        }
+
+        function changerCouleur() {
+            const couleurs = ['#ffcdd2', '#c8e6c9', '#bbdefb', '#f8bbd0', '#d1c4e9'];
+            const couleur = couleurs[Math.floor(Math.random() * couleurs.length)];
+            document.getElementById('demo-dom-box').style.backgroundColor = couleur;
+        }
+
+        function ajouterElement() {
+            const p = document.createElement('p');
+            p.textContent = `Élément ajouté à ${new Date().toLocaleTimeString()}`;
+            p.style.color = '#667eea';
+            document.getElementById('demo-dom-box').appendChild(p);
+        }
+
+        // Compteur
+        function incrementerCompteur() {
+            compteur++;
+            document.getElementById('compteur-display').textContent = compteur;
+        }
+
+        function decrementerCompteur() {
+            compteur--;
+            document.getElementById('compteur-display').textContent = compteur;
+        }
+
+        function resetCompteur() {
+            compteur = 0;
+            document.getElementById('compteur-display').textContent = compteur;
+        }
+
+        function multiplierCompteur() {
+            compteur *= 2;
+            document.getElementById('compteur-display').textContent = compteur;
+        }
+
+        // Liste interactive
+        function ajouterItem() {
+            const input = document.getElementById('item-input');
+            const texte = input.value.trim();
+
+            if (texte) {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <span style="flex: 1;">${texte}</span>
+                    <button style="background: #f44336; font-size: 0.8em; padding: 5px 10px;">Supprimer</button>
+                `;
+                li.style.cssText = 'display: flex; align-items: center; gap: 10px; padding: 10px; background: #f8f9fa; margin: 5px 0; border-radius: 5px;';
+
+                document.getElementById('liste-interactive').appendChild(li);
+                input.value = '';
+            }
+        }
+
+        // Délégation d'événements pour la liste
+        document.addEventListener('DOMContentLoaded', () => {
+            const liste = document.getElementById('liste-interactive');
+            if (liste) {
+                liste.addEventListener('click', (e) => {
+                    if (e.target.tagName === 'BUTTON') {
+                        e.target.parentElement.remove();
+                    } else if (e.target.tagName === 'SPAN') {
+                        e.target.parentElement.style.opacity = 
+                            e.target.parentElement.style.opacity === '0.5' ? '1' : '0.5';
+                    }
+                });
+            }
+        });
+
+        // Contacts
+        function ajouterContact() {
+            const nom = document.getElementById('contact-nom').value.trim();
+            const email = document.getElementById('contact-email').value.trim();
+            const tel = document.getElementById('contact-tel').value.trim();
+
+            if (nom && email) {
+                contacts.push({nom, email, tel});
+                document.getElementById('contact-nom').value = '';
+                document.getElementById('contact-email').value = '';
+                document.getElementById('contact-tel').value = '';
+                afficherContacts();
+            }
+        }
+
+        function afficherContacts() {
+            const result = document.getElementById('contacts-result');
+            if (contacts.length === 0) {
+                result.innerHTML = 'Aucun contact';
+                return;
+            }
+
+            result.innerHTML = '<strong>Contacts:</strong><br>' +
+                contacts.map((c, i) => `
+                    ${i + 1}. <strong>${c.nom}</strong><br>
+                    📧 ${c.email}<br>
+                    📞 ${c.tel || 'N/A'}<br>
+                `).join('<br>');
+        }
+
+        // Livres POO
+        class Livre {
+            constructor(titre, auteur, pages) {
+                this.titre = titre;
+                this.auteur = auteur;
+                this.pages = pages;
+            }
+
+            decrire() {
+                return `"${this.titre}" par ${this.auteur} (${this.pages} pages)`;
+            }
+        }
+
+        function ajouterLivre() {
+            const titre = document.getElementById('livre-titre').value.trim();
+            const auteur = document.getElementById('livre-auteur').value.trim();
+            const pages = parseInt(document.getElementById('livre-pages').value);
+
+            if (titre && auteur && pages > 0) {
+                const livre = new Livre(titre, auteur, pages);
+                livres.push(livre);
+                document.getElementById('livre-titre').value = '';
+                document.getElementById('livre-auteur').value = '';
+                document.getElementById('livre-pages').value = '';
+                afficherLivres();
+            }
+        }
+
+        function afficherLivres() {
+            const result = document.getElementById('livres-result');
+            if (livres.length === 0) {
+                result.innerHTML = 'Aucun livre';
+                return;
+            }
+
+            const totalPages = livres.reduce((acc, l) => acc + l.pages, 0);
+            result.innerHTML = '<strong>Bibliothèque:</strong><br>' +
+                livres.map((l, i) => `${i + 1}. ${l.decrire()}`).join('<br>') +
+                `<br><br><strong>Total: ${livres.length} livres (${totalPages} pages)</strong>`;
+        }
+
+        // Citations API
+        async function chargerCitation() {
+            const result = document.getElementById('citations-result');
+            result.innerHTML = '<em>Chargement...</em>';
+            
+            try {
+                const response = await fetch('https://api.quotable.io/random');
+                const data = await response.json();
+                result.innerHTML = `
+                    <blockquote style="border-left: 4px solid #667eea; padding-left: 15px; font-style: italic;">
+                        "${data.content}"
+                        <footer style="margin-top: 10px; font-style: normal; color: #666;">
+                            — ${data.author}
+                        </footer>
+                    </blockquote>
+                `;
+            } catch (error) {
+                result.innerHTML = '<strong style="color: red;">Erreur de chargement</strong>';
+            }
+        }
+
+        async function chargerPlusieursCitations() {
+            const result = document.getElementById('citations-result');
+            result.innerHTML = '<em>Chargement de 3 citations...</em>';
+            
+            try {
+                const promises = [
+                    fetch('https://api.quotable.io/random').then(r => r.json()),
+                    fetch('https://api.quotable.io/random').then(r => r.json()),
+                    fetch('https://api.quotable.io/random').then(r => r.json())
+                ];
+                
+                const citations = await Promise.all(promises);
+                
+                result.innerHTML = citations.map((data, i) => `
+                    <div style="margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                        <strong>${i + 1}.</strong> "${data.content}"
+                        <div style="text-align: right; color: #666; margin-top: 5px;">— ${data.author}</div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                result.innerHTML = '<strong style="color: red;">Erreur de chargement</strong>';
+            }
+        }
+
+        // Minuteur
+        function demarrerMinuteur() {
+            if (timerInterval) return;
+            
+            timerSecondes = parseInt(document.getElementById('timer-seconds').value) || 10;
+            
+            timerInterval = setInterval(() => {
+                timerSecondes--;
+                afficherMinuteur();
+                
+                if (timerSecondes <= 0) {
+                    arreterMinuteur();
+                    alert('⏰ Temps écoulé!');
+                }
+            }, 1000);
+        }
+
+        function arreterMinuteur() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function resetMinuteur() {
+            arreterMinuteur();
+            timerSecondes = parseInt(document.getElementById('timer-seconds').value) || 10;
+            afficherMinuteur();
+        }
+
+        function afficherMinuteur() {
+            const minutes = Math.floor(timerSecondes / 60);
+            const secondes = timerSecondes % 60;
+            document.getElementById('timer-display').textContent = 
+                `${String(minutes).padStart(2, '0')}:${String(secondes).padStart(2, '0')}`;
+        }
+
+        // Todo List complète
+        class Todo {
+            constructor(texte) {
+                this.id = Date.now();
+                this.texte = texte;
+                this.complete = false;
+            }
+        }
+
+        let filtreActuel = 'tous';
+
+        function ajouterTodo() {
+            const input = document.getElementById('todo-input');
+            const texte = input.value.trim();
+
+            if (texte) {
+                todos.push(new Todo(texte));
+                input.value = '';
+                afficherTodos();
+            }
+        }
+
+        function toggleTodo(id) {
+            const todo = todos.find(t => t.id === id);
+            if (todo) {
+                todo.complete = !todo.complete;
+                afficherTodos();
+            }
+        }
+
+        function supprimerTodo(id) {
+            todos = todos.filter(t => t.id !== id);
+            afficherTodos();
+        }
+
+        function filtrerTodos(filtre) {
+            filtreActuel = filtre;
+            afficherTodos();
+        }
+
+        function viderCompletes() {
+            todos = todos.filter(t => !t.complete);
+            afficherTodos();
+        }
+
+        function afficherTodos() {
+            const liste = document.getElementById('todo-liste');
+            const stats = document.getElementById('todo-stats');
+
+            let todosAffiches = todos;
+            if (filtreActuel === 'actifs') {
+                todosAffiches = todos.filter(t => !t.complete);
+            } else if (filtreActuel === 'completes') {
+                todosAffiches = todos.filter(t => t.complete);
+            }
+
+            if (todosAffiches.length === 0) {
+                liste.innerHTML = '<li style="text-align: center; color: #999;">Aucune tâche</li>';
+            } else {
+                liste.innerHTML = todosAffiches.map(todo => `
+                    <li style="display: flex; align-items: center; gap: 10px; padding: 12px; background: ${todo.complete ? '#f0f0f0' : 'white'}; margin: 5px 0; border-radius: 5px; border: 1px solid #ddd;">
+                        <input type="checkbox" ${todo.complete ? 'checked' : ''} 
+                               onchange="toggleTodo(${todo.id})" 
+                               style="width: 20px; height: 20px; cursor: pointer;">
+                        <span style="flex: 1; ${todo.complete ? 'text-decoration: line-through; color: #999;' : ''}">${todo.texte}</span>
+                        <button onclick="supprimerTodo(${todo.id})" 
+                                style="background: #f44336; font-size: 0.8em; padding: 5px 10px;">
+                            ✕
+                        </button>
+                    </li>
+                `).join('');
+            }
+
+            const actifs = todos.filter(t => !t.complete).length;
+            const completes = todos.filter(t => t.complete).length;
+            stats.innerHTML = `${actifs} actives • ${completes} complétées • ${todos.length} total`;
+        }
+
+        // Calculatrice avancée
+        function ajouterCalcul(valeur) {
+            const display = document.getElementById('calc-display');
+            calcDisplay += valeur;
+            display.value = calcDisplay;
+        }
+
+        function calculerResultat() {
+            const display = document.getElementById('calc-display');
+            try {
+                calcDisplay = eval(calcDisplay).toString();
+                display.value = calcDisplay;
+            } catch (error) {
+                display.value = 'Erreur';
+                calcDisplay = '';
+            }
+        }
+
+        function effacerCalcul() {
+            calcDisplay = '';
+            document.getElementById('calc-display').value = '';
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            afficherMinuteur();
+        });
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9em;
+        }
+
+        .nav {
+            background: #2d3748;
+            padding: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            overflow-x: auto;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .nav a:hover {
+            background: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        section {
+            margin-bottom: 60px;
+            scroll-margin-top: 80px;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.5em;
+            margin: 30px 0 15px;
+        }
+
+        h4 {
+            color: #2d3748;
+            font-size: 1.2em;
+            margin: 20px 0 10px;
+        }
+
+        /* ÉDITEUR DE CODE INTERACTIF */
+        .code-editor {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #1e1e1e;
+        }
+
+        .editor-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .editor-header {
+            background: #2d3748;
+            color: white;
+            padding: 10px 15px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .editor-content {
+            flex: 1;
+            position: relative;
+        }
+
+        .code-input {
+            width: 100%;
+            height: 300px;
+            padding: 15px;
+            background: #1e1e1e;
+            color: #e0e0e0;
+            border: none;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+            outline: none;
+        }
+
+        .output-area {
+            background: white;
+            color: #333;
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .run-button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .run-button:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+
+        .reset-button {
+            background: #ff9800;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 5px;
+        }
+
+        /* CODE STATIQUE */
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .code-block::before {
+            content: 'JavaScript';
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 3px;
+            font-size: 0.8em;
+        }
+
+        .copy-button {
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 0.8em;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .copy-button:hover {
+            opacity: 1;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .example {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .example-title {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        button:not(.run-button):not(.reset-button):not(.copy-button) {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 5px;
+        }
+
+        button:hover:not(.run-button):not(.reset-button) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .console-output {
+            background: #1e1e1e;
+            color: #4caf50;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            min-height: 100px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .console-line {
+            margin: 5px 0;
+            padding: 5px;
+            border-left: 3px solid #4caf50;
+            padding-left: 10px;
+        }
+
+        .console-error {
+            color: #f44336;
+            border-left-color: #f44336;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th {
+            background: #667eea;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        table td {
+            padding: 12px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom: 3px solid #667eea;
+            margin-bottom: -2px;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        footer {
+            background: #2d3748;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .code-editor {
+                grid-template-columns: 1fr;
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+
+        /* Animation pour les résultats */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animated {
+            animation: fadeIn 0.3s ease-in;
+        }
+    </style>
+</head>
+
+ <script src="protection.js"></script>
+    <script>
+        // Exemples de code par défaut
+        const codeExemples = {
+            variables: `// Testez les variables !
+const prenom = "Alice";
+const age = 25;
+
+console.log(\`Je m'appelle \${prenom}\`);
+console.log(\`J'ai \${age} ans\`);
+
+// Modifiez et ajoutez votre code ici
+const ville = "Paris";
+console.log(\`J'habite à \${ville}\`);`
+        };
+
+        // Fonction pour exécuter le code JavaScript
+        function executerCode(editorId, outputId) {
+            const editor = document.getElementById(editorId);
+            const output = document.getElementById(outputId);
+            const code = editor.value;
+
+            // Capturer console.log
+            let logs = [];
+            const originalLog = console.log;
+            console.log = function(...args) {
+                logs.push(args.map(arg => {
+                    if (typeof arg === 'object') {
+                        return JSON.stringify(arg, null, 2);
+                    }
+                    return String(arg);
+                }).join(' '));
+                originalLog.apply(console, args);
+            };
+
+            try {
+                // Exécuter le code
+                eval(code);
+                
+                // Afficher les résultats
+                if (logs.length > 0) {
+                    output.innerHTML = logs.map(log => 
+                        `<div class="console-line">${log}</div>`
+                    ).join('');
+                } else {
+                    output.innerHTML = '<div class="console-line">Code exécuté avec succès (pas de sortie console)</div>';
+                }
+                
+                output.classList.add('animated');
+            } catch (error) {
+                output.innerHTML = `<div class="console-line console-error">❌ Erreur: ${error.message}</div>`;
+            } finally {
+                // Restaurer console.log
+                console.log = originalLog;
+                
+                // Retirer l'animation après
+                setTimeout(() => output.classList.remove('animated'), 300);
+            }
+        }
+
+        // Fonction pour exécuter du code asynchrone
+        async function executerCodeAsync(editorId, outputId) {
+            const editor = document.getElementById(editorId);
+            const output = document.getElementById(outputId);
+            const code = editor.value;
+
+            let logs = [];
+            const originalLog = console.log;
+            console.log = function(...args) {
+                logs.push(args.map(arg => {
+                    if (typeof arg === 'object') {
+                        return JSON.stringify(arg, null, 2);
+                    }
+                    return String(arg);
+                }).join(' '));
+                originalLog.apply(console, args);
+            };
+
+            try {
+                // Créer une fonction async et l'exécuter
+                const asyncFunc = new Function(`
+                    return (async () => {
+                        ${code}
+                    })();
+                `);
+                
+                await asyncFunc();
+                
+                if (logs.length > 0) {
+                    output.innerHTML = logs.map(log => 
+                        `<div class="console-line">${log}</div>`
+                    ).join('');
+                } else {
+                    output.innerHTML = '<div class="console-line">Code exécuté (pas de sortie)</div>';
+                }
+            } catch (error) {
+                output.innerHTML = `<div class="console-line console-error">❌ Erreur: ${error.message}</div>`;
+            } finally {
+                console.log = originalLog;
+            }
+        }
+
+        // Reset le code
+        function resetCode(editorId, defaultCode) {
+            document.getElementById(editorId).value = defaultCode;
+        }
+
+        // Copier le code
+        function copierCode(button) {
+            const codeBlock = button.parentElement;
+            const code = codeBlock.textContent.replace('📋 Copier', '').replace('JavaScript', '').trim();
+            
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = button.textContent;
+                button.textContent = '✅ Copié!';
+                setTimeout(() => {
+                    button.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Gestion des tabs
+        let currentTab = 0;
+        function changerTab(index) {
+            const tabs = document.querySelectorAll('.tab');
+            const contents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach((tab, i) => {
+                if (i === index) {
+                    tab.classList.add('active');
+                    contents[i].classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                    contents[i].classList.remove('active');
+                }
+            });
+            
+            currentTab = index;
+        }
+
+        // Manipulation DOM
+        function changerTexteDom() {
+            const texte = document.getElementById('demo-input').value;
+            document.getElementById('demo-text').textContent = texte;
+        }
+
+        function changerCouleurDom() {
+            const couleurs = ['#ffcdd2', '#c8e6c9', '#bbdefb', '#f8bbd0', '#d1c4e9', '#ffe0b2'];
+            const couleur = couleurs[Math.floor(Math.random() * couleurs.length)];
+            document.getElementById('demo-box').style.backgroundColor = couleur;
+        }
+
+        function ajouterElementDom() {
+            const p = document.createElement('p');
+            p.textContent = `Ajouté à ${new Date().toLocaleTimeString()}`;
+            p.style.color = '#667eea';
+            p.style.animation = 'fadeIn 0.3s';
+            document.getElementById('demo-box').appendChild(p);
+        }
+
+        // Test API
+        async function testerAPI() {
+            const result = document.getElementById('api-result');
+            result.innerHTML = '<div style="text-align: center;">⏳ Chargement...</div>';
+            
+            try {
+                const response = await fetch('https://api.quotable.io/random');
+                const data = await response.json();
+                
+                result.innerHTML = `
+                    <blockquote style="border-left: 4px solid #667eea; padding-left: 15px; font-style: italic; margin: 0;">
+                        <p style="font-size: 1.1em; margin-bottom: 10px;">"${data.content}"</p>
+                        <footer style="text-align: right; color: #666;">— ${data.author}</footer>
+                    </blockquote>
+                `;
+            } catch (error) {
+                result.innerHTML = '<div style="color: red;">❌ Erreur de chargement</div>';
+            }
+        }
+
+        // Todo List
+        let todos = [];
+        let todoId = 0;
+
+        function ajouterTodo() {
+            const input = document.getElementById('todo-input');
+            const texte = input.value.trim();
+            
+            if (texte) {
+                todos.push({
+                    id: todoId++,
+                    texte: texte,
+                    complete: false
+                });
+                input.value = '';
+                afficherTodos();
+            }
+        }
+
+        function toggleTodo(id) {
+            const todo = todos.find(t => t.id === id);
+            if (todo) {
+                todo.complete = !todo.complete;
+                afficherTodos();
+            }
+        }
+
+        function supprimerTodo(id) {
+            todos = todos.filter(t => t.id !== id);
+            afficherTodos();
+        }
+
+        function afficherTodos() {
+            const liste = document.getElementById('todo-list');
+            const stats = document.getElementById('todo-stats');
+            
+            if (todos.length === 0) {
+                liste.innerHTML = '<li style="text-align: center; color: #999; padding: 20px;">Aucune tâche</li>';
+                stats.innerHTML = '';
+                return;
+            }
+            
+            liste.innerHTML = todos.map(todo => `
+                <li style="display: flex; align-items: center; gap: 10px; padding: 12px; background: ${todo.complete ? '#f0f0f0' : 'white'}; margin: 8px 0; border-radius: 5px; border: 1px solid #ddd; transition: all 0.3s;">
+                    <input type="checkbox" ${todo.complete ? 'checked' : ''} 
+                           onchange="toggleTodo(${todo.id})" 
+                           style="width: 18px; height: 18px; cursor: pointer;">
+                    <span style="flex: 1; ${todo.complete ? 'text-decoration: line-through; color: #999;' : ''}">${todo.texte}</span>
+                    <button onclick="supprimerTodo(${todo.id})" 
+                            style="background: #f44336; padding: 5px 10px; font-size: 0.9em; border-radius: 3px;">
+                        🗑️
+                    </button>
+                </li>
+            `).join('');
+            
+            const actifs = todos.filter(t => !t.complete).length;
+            const completes = todos.filter(t => t.complete).length;
+            stats.innerHTML = `${actifs} active${actifs > 1 ? 's' : ''} • ${completes} terminée${completes > 1 ? 's' : ''}`;
+        }
+
+        // Calculatrice
+        let calcDisplay = '';
+
+        function ajouterCalc(valeur) {
+            calcDisplay += valeur;
+            document.getElementById('calc-display').value = calcDisplay;
+        }
+
+        function calculer() {
+            try {
+                calcDisplay = eval(calcDisplay.replace('×', '*').replace('÷', '/').replace('−', '-')).toString();
+                document.getElementById('calc-display').value = calcDisplay;
+            } catch {
+                document.getElementById('calc-display').value = 'Erreur';
+                calcDisplay = '';
+            }
+        }
+
+        function effacerCalc() {
+            calcDisplay = '';
+            document.getElementById('calc-display').value = '';
+        }
+
+        // Générateur de couleurs
+        function genererCouleur() {
+            const r = Math.floor(Math.random() * 256);
+            const g = Math.floor(Math.random() * 256);
+            const b = Math.floor(Math.random() * 256);
+            const hex = '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+            
+            document.getElementById('color-display').style.backgroundColor = hex;
+            document.getElementById('color-code').textContent = hex;
+        }
+
+        function copierCouleur() {
+            const code = document.getElementById('color-code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = '✅ Copié!';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        // Initialisation
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Formation JavaScript Interactive chargée!');
+        });
+    </script>
+    
+</body>
 </html>
